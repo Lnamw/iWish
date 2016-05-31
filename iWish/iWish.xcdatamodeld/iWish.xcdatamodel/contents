@@ -8,12 +8,13 @@
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="List" inverseName="items" inverseEntity="List" syncable="YES"/>
     </entity>
     <entity name="List" representedClassName="List" syncable="YES">
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="lists" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="List" positionX="-126" positionY="-45" width="128" height="88"/>
         <element name="Item" positionX="88" positionY="-54" width="128" height="118"/>
+        <element name="List" positionX="-126" positionY="-45" width="128" height="105"/>
     </elements>
 </model>

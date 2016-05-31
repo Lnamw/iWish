@@ -15,6 +15,7 @@
 
 @dynamic name;
 @dynamic picture;
+@dynamic details;
 @dynamic items;
 
 @end

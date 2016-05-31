@@ -18,7 +18,7 @@
 		AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */; };
 		AACDCCD61CFDFE11001CB851 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD21CFDFE11001CB851 /* Item.m */; };
 		AAE763951CFE01D200051FC2 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763941CFE01D200051FC2 /* ListTableViewController.m */; };
-		AAE763981CFE053200051FC2 /* AddNewListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763971CFE053200051FC2 /* AddNewListViewController.m */; };
+		AAE763A41CFE282000051FC2 /* AddListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763A31CFE282000051FC2 /* AddListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +41,8 @@
 		AACDCCD21CFDFE11001CB851 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		AAE763931CFE01D200051FC2 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
 		AAE763941CFE01D200051FC2 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
-		AAE763961CFE053200051FC2 /* AddNewListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewListViewController.h; sourceTree = "<group>"; };
-		AAE763971CFE053200051FC2 /* AddNewListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewListViewController.m; sourceTree = "<group>"; };
+		AAE763A21CFE282000051FC2 /* AddListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddListViewController.h; sourceTree = "<group>"; };
+		AAE763A31CFE282000051FC2 /* AddListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +126,8 @@
 			children = (
 				AAE763931CFE01D200051FC2 /* ListTableViewController.h */,
 				AAE763941CFE01D200051FC2 /* ListTableViewController.m */,
-				AAE763961CFE053200051FC2 /* AddNewListViewController.h */,
-				AAE763971CFE053200051FC2 /* AddNewListViewController.m */,
+				AAE763A21CFE282000051FC2 /* AddListViewController.h */,
+				AAE763A31CFE282000051FC2 /* AddListViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -202,9 +202,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAE763981CFE053200051FC2 /* AddNewListViewController.m in Sources */,
 				AACDCCD61CFDFE11001CB851 /* Item.m in Sources */,
 				AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */,
+				AAE763A41CFE282000051FC2 /* AddListViewController.m in Sources */,
 				AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */,
 				AACDCCBF1CFDFBBE001CB851 /* iWish.xcdatamodeld in Sources */,
 				AACDCCD41CFDFE11001CB851 /* List.m in Sources */,

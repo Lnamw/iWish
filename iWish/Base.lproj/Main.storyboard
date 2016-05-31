@@ -53,7 +53,7 @@
         <!--Create a new List-->
         <scene sceneID="Ujs-Hp-Ho0">
             <objects>
-                <viewController title="Create a new List" id="ypn-Pu-Uci" customClass="AddNewListViewController" sceneMemberID="viewController">
+                <viewController title="Create a new List" id="ypn-Pu-Uci" customClass="AddListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lCF-jY-4vS"/>
                         <viewControllerLayoutGuide type="bottom" id="mNK-kr-i8t"/>
@@ -67,7 +67,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="ypn-Pu-Uci" id="pas-bY-YiU"/>
+                                    <outlet property="delegate" destination="ypn-Pu-Uci" id="cwx-E6-UUj"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -81,17 +81,17 @@
                     <navigationItem key="navigationItem" id="MSP-7H-cxt">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CgS-8v-Pqx">
                             <connections>
-                                <action selector="cancelButtonPressed:" destination="ypn-Pu-Uci" id="G7j-da-2m8"/>
+                                <action selector="cancelButtonPressed:" destination="ypn-Pu-Uci" id="gZR-e0-gft"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="eqA-5b-yXo">
                             <connections>
-                                <action selector="doneButtonPressed:" destination="ypn-Pu-Uci" id="78c-pW-PEG"/>
+                                <action selector="doneButtonPressed:" destination="ypn-Pu-Uci" id="Y21-B2-tqG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="listNameTextField" destination="nRr-AY-RWJ" id="hE2-CV-d7S"/>
+                        <outlet property="listNameTextField" destination="nRr-AY-RWJ" id="jqr-B0-zU0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHw-wJ-0aE" userLabel="First Responder" sceneMemberID="firstResponder"/>

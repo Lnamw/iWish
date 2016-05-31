@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		AACDCCB31CFDFBBE001CB851 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB21CFDFBBE001CB851 /* main.m */; };
 		AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB51CFDFBBE001CB851 /* AppDelegate.m */; };
-		AACDCCB91CFDFBBE001CB851 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB81CFDFBBE001CB851 /* ViewController.m */; };
 		AACDCCBC1CFDFBBE001CB851 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */; };
 		AACDCCBF1CFDFBBE001CB851 /* iWish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCBD1CFDFBBE001CB851 /* iWish.xcdatamodeld */; };
 		AACDCCC11CFDFBBE001CB851 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AACDCCC01CFDFBBE001CB851 /* Assets.xcassets */; };
 		AACDCCC41CFDFBBE001CB851 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACDCCC21CFDFBBE001CB851 /* LaunchScreen.storyboard */; };
+		AACDCCD31CFDFE11001CB851 /* List+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCCC1CFDFE11001CB851 /* List+CoreDataProperties.m */; };
+		AACDCCD41CFDFE11001CB851 /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCCE1CFDFE11001CB851 /* List.m */; };
+		AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */; };
+		AACDCCD61CFDFE11001CB851 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD21CFDFE11001CB851 /* Item.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,13 +24,19 @@
 		AACDCCB21CFDFBBE001CB851 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AACDCCB41CFDFBBE001CB851 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AACDCCB51CFDFBBE001CB851 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AACDCCB71CFDFBBE001CB851 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AACDCCB81CFDFBBE001CB851 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AACDCCBB1CFDFBBE001CB851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AACDCCBE1CFDFBBE001CB851 /* iWish.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iWish.xcdatamodel; sourceTree = "<group>"; };
 		AACDCCC01CFDFBBE001CB851 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AACDCCC31CFDFBBE001CB851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AACDCCC51CFDFBBE001CB851 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AACDCCCB1CFDFE11001CB851 /* List+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "List+CoreDataProperties.h"; sourceTree = "<group>"; };
+		AACDCCCC1CFDFE11001CB851 /* List+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "List+CoreDataProperties.m"; sourceTree = "<group>"; };
+		AACDCCCD1CFDFE11001CB851 /* List.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = List.h; sourceTree = "<group>"; };
+		AACDCCCE1CFDFE11001CB851 /* List.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = List.m; sourceTree = "<group>"; };
+		AACDCCCF1CFDFE11001CB851 /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Item+CoreDataProperties.h"; sourceTree = "<group>"; };
+		AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
+		AACDCCD11CFDFE11001CB851 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		AACDCCD21CFDFE11001CB851 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,15 +69,13 @@
 		AACDCCB01CFDFBBE001CB851 /* iWish */ = {
 			isa = PBXGroup;
 			children = (
+				AACDCCD71CFDFE2B001CB851 /* CoreData Models */,
 				AACDCCB41CFDFBBE001CB851 /* AppDelegate.h */,
 				AACDCCB51CFDFBBE001CB851 /* AppDelegate.m */,
-				AACDCCB71CFDFBBE001CB851 /* ViewController.h */,
-				AACDCCB81CFDFBBE001CB851 /* ViewController.m */,
 				AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */,
 				AACDCCC01CFDFBBE001CB851 /* Assets.xcassets */,
 				AACDCCC21CFDFBBE001CB851 /* LaunchScreen.storyboard */,
 				AACDCCC51CFDFBBE001CB851 /* Info.plist */,
-				AACDCCBD1CFDFBBE001CB851 /* iWish.xcdatamodeld */,
 				AACDCCB11CFDFBBE001CB851 /* Supporting Files */,
 			);
 			path = iWish;
@@ -80,6 +87,31 @@
 				AACDCCB21CFDFBBE001CB851 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AACDCCD71CFDFE2B001CB851 /* CoreData Models */ = {
+			isa = PBXGroup;
+			children = (
+				AACDCCBD1CFDFBBE001CB851 /* iWish.xcdatamodeld */,
+				AACDCCD81CFDFE55001CB851 /* XCODE GENERATED - DO NOT EDIT */,
+				AACDCCCD1CFDFE11001CB851 /* List.h */,
+				AACDCCCE1CFDFE11001CB851 /* List.m */,
+				AACDCCD11CFDFE11001CB851 /* Item.h */,
+				AACDCCD21CFDFE11001CB851 /* Item.m */,
+			);
+			name = "CoreData Models";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		AACDCCD81CFDFE55001CB851 /* XCODE GENERATED - DO NOT EDIT */ = {
+			isa = PBXGroup;
+			children = (
+				AACDCCCB1CFDFE11001CB851 /* List+CoreDataProperties.h */,
+				AACDCCCC1CFDFE11001CB851 /* List+CoreDataProperties.m */,
+				AACDCCCF1CFDFE11001CB851 /* Item+CoreDataProperties.h */,
+				AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */,
+			);
+			name = "XCODE GENERATED - DO NOT EDIT";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,9 +184,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACDCCB91CFDFBBE001CB851 /* ViewController.m in Sources */,
+				AACDCCD61CFDFE11001CB851 /* Item.m in Sources */,
+				AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */,
 				AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */,
 				AACDCCBF1CFDFBBE001CB851 /* iWish.xcdatamodeld in Sources */,
+				AACDCCD41CFDFE11001CB851 /* List.m in Sources */,
+				AACDCCD31CFDFE11001CB851 /* List+CoreDataProperties.m in Sources */,
 				AACDCCB31CFDFBBE001CB851 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +351,8 @@
 				AACDCCBE1CFDFBBE001CB851 /* iWish.xcdatamodel */,
 			);
 			currentVersion = AACDCCBE1CFDFBBE001CB851 /* iWish.xcdatamodel */;
-			path = iWish.xcdatamodeld;
+			name = iWish.xcdatamodeld;
+			path = iWish/iWish.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

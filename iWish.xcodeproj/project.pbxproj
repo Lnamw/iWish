@@ -17,6 +17,8 @@
 		AACDCCD41CFDFE11001CB851 /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCCE1CFDFE11001CB851 /* List.m */; };
 		AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */; };
 		AACDCCD61CFDFE11001CB851 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD21CFDFE11001CB851 /* Item.m */; };
+		AAE763951CFE01D200051FC2 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763941CFE01D200051FC2 /* ListTableViewController.m */; };
+		AAE763981CFE053200051FC2 /* AddNewListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763971CFE053200051FC2 /* AddNewListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,10 @@
 		AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Item+CoreDataProperties.m"; sourceTree = "<group>"; };
 		AACDCCD11CFDFE11001CB851 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		AACDCCD21CFDFE11001CB851 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		AAE763931CFE01D200051FC2 /* ListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewController.h; sourceTree = "<group>"; };
+		AAE763941CFE01D200051FC2 /* ListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewController.m; sourceTree = "<group>"; };
+		AAE763961CFE053200051FC2 /* AddNewListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewListViewController.h; sourceTree = "<group>"; };
+		AAE763971CFE053200051FC2 /* AddNewListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				AACDCCD71CFDFE2B001CB851 /* CoreData Models */,
+				AAE763921CFE01A100051FC2 /* View Controllers */,
 				AACDCCB41CFDFBBE001CB851 /* AppDelegate.h */,
 				AACDCCB51CFDFBBE001CB851 /* AppDelegate.m */,
 				AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */,
@@ -112,6 +119,17 @@
 				AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */,
 			);
 			name = "XCODE GENERATED - DO NOT EDIT";
+			sourceTree = "<group>";
+		};
+		AAE763921CFE01A100051FC2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AAE763931CFE01D200051FC2 /* ListTableViewController.h */,
+				AAE763941CFE01D200051FC2 /* ListTableViewController.m */,
+				AAE763961CFE053200051FC2 /* AddNewListViewController.h */,
+				AAE763971CFE053200051FC2 /* AddNewListViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE763981CFE053200051FC2 /* AddNewListViewController.m in Sources */,
 				AACDCCD61CFDFE11001CB851 /* Item.m in Sources */,
 				AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */,
 				AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */,
@@ -191,6 +210,7 @@
 				AACDCCD41CFDFE11001CB851 /* List.m in Sources */,
 				AACDCCD31CFDFE11001CB851 /* List+CoreDataProperties.m in Sources */,
 				AACDCCB31CFDFBBE001CB851 /* main.m in Sources */,
+				AAE763951CFE01D200051FC2 /* ListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +361,7 @@
 				AACDCCCA1CFDFBBE001CB851 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

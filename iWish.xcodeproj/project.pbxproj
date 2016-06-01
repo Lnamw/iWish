@@ -20,6 +20,8 @@
 		AAE763951CFE01D200051FC2 /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763941CFE01D200051FC2 /* ListTableViewController.m */; };
 		AAE763A41CFE282000051FC2 /* AddListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763A31CFE282000051FC2 /* AddListViewController.m */; };
 		AAE763C31CFEDB3700051FC2 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763C21CFEDB3700051FC2 /* ListCell.m */; };
+		AAE763CC1CFF498A00051FC2 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */; };
+		AAE763CF1CFF49A800051FC2 /* ItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763CE1CFF49A800051FC2 /* ItemTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,10 @@
 		AAE763A31CFE282000051FC2 /* AddListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddListViewController.m; sourceTree = "<group>"; };
 		AAE763C11CFEDB3700051FC2 /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
 		AAE763C21CFEDB3700051FC2 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
+		AAE763CA1CFF498A00051FC2 /* AddItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddItemViewController.h; sourceTree = "<group>"; };
+		AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
+		AAE763CD1CFF49A800051FC2 /* ItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableViewController.h; sourceTree = "<group>"; };
+		AAE763CE1CFF49A800051FC2 /* ItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,10 +134,8 @@
 		AAE763921CFE01A100051FC2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AAE763931CFE01D200051FC2 /* ListTableViewController.h */,
-				AAE763941CFE01D200051FC2 /* ListTableViewController.m */,
-				AAE763A21CFE282000051FC2 /* AddListViewController.h */,
-				AAE763A31CFE282000051FC2 /* AddListViewController.m */,
+				AAE763C41CFF492D00051FC2 /* List */,
+				AAE763C51CFF493D00051FC2 /* Item */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -143,6 +147,28 @@
 				AAE763C21CFEDB3700051FC2 /* ListCell.m */,
 			);
 			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		AAE763C41CFF492D00051FC2 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				AAE763931CFE01D200051FC2 /* ListTableViewController.h */,
+				AAE763941CFE01D200051FC2 /* ListTableViewController.m */,
+				AAE763A21CFE282000051FC2 /* AddListViewController.h */,
+				AAE763A31CFE282000051FC2 /* AddListViewController.m */,
+			);
+			name = List;
+			sourceTree = "<group>";
+		};
+		AAE763C51CFF493D00051FC2 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				AAE763CD1CFF49A800051FC2 /* ItemTableViewController.h */,
+				AAE763CE1CFF49A800051FC2 /* ItemTableViewController.m */,
+				AAE763CA1CFF498A00051FC2 /* AddItemViewController.h */,
+				AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */,
+			);
+			name = Item;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AACDCCD61CFDFE11001CB851 /* Item.m in Sources */,
+				AAE763CC1CFF498A00051FC2 /* AddItemViewController.m in Sources */,
 				AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */,
 				AAE763A41CFE282000051FC2 /* AddListViewController.m in Sources */,
 				AAE763C31CFEDB3700051FC2 /* ListCell.m in Sources */,
@@ -225,6 +252,7 @@
 				AACDCCD41CFDFE11001CB851 /* List.m in Sources */,
 				AACDCCD31CFDFE11001CB851 /* List+CoreDataProperties.m in Sources */,
 				AACDCCB31CFDFBBE001CB851 /* main.m in Sources */,
+				AAE763CF1CFF49A800051FC2 /* ItemTableViewController.m in Sources */,
 				AAE763951CFE01D200051FC2 /* ListTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

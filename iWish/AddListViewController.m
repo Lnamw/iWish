@@ -16,9 +16,12 @@
 @interface AddListViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *listNameTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *listImageView;
+@property (weak, nonatomic) IBOutlet UITextField *listDescripitionTextField;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
+- (IBAction)addPictureButtonPressed:(id)sender;
 
 @end
 
@@ -80,5 +83,8 @@
 - (IBAction)cancelButtonPressed:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)addPictureButtonPressed:(id)sender {
 }
 @end

@@ -63,17 +63,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the name of your new list" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nRr-AY-RWJ">
-                                <rect key="frame" x="120.5" y="104" width="360" height="30"/>
+                                <rect key="frame" x="18" y="104" width="564" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ypn-Pu-Uci" id="cwx-E6-UUj"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2E-w3-hve">
+                                <rect key="frame" x="20" y="174" width="85" height="30"/>
+                                <state key="normal" title="Add Picture:"/>
+                                <connections>
+                                    <action selector="addPictureButtonPressed:" destination="ypn-Pu-Uci" eventType="touchUpInside" id="FNM-ZH-jfk"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-wS-DoK">
+                                <rect key="frame" x="180" y="212" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="TZe-jl-j4H"/>
+                                    <constraint firstAttribute="width" constant="240" id="g4b-nd-pCG"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter description for your List" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RIP-tJ-aHO">
+                                <rect key="frame" x="18" y="380" width="564" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="nRr-AY-RWJ" firstAttribute="width" secondItem="igu-2e-wIb" secondAttribute="width" multiplier="0.6" id="KiN-DA-LYE"/>
+                            <constraint firstItem="nRr-AY-RWJ" firstAttribute="width" secondItem="igu-2e-wIb" secondAttribute="width" multiplier="0.94" id="KiN-DA-LYE"/>
+                            <constraint firstItem="RIP-tJ-aHO" firstAttribute="centerX" secondItem="igu-2e-wIb" secondAttribute="centerX" id="PIk-1q-9gz"/>
+                            <constraint firstItem="R2E-w3-hve" firstAttribute="leading" secondItem="igu-2e-wIb" secondAttribute="leading" constant="20" id="Qbo-0J-bQ8"/>
+                            <constraint firstItem="A7Q-wS-DoK" firstAttribute="centerX" secondItem="igu-2e-wIb" secondAttribute="centerX" id="dY5-ik-4oH"/>
+                            <constraint firstItem="R2E-w3-hve" firstAttribute="top" secondItem="nRr-AY-RWJ" secondAttribute="bottom" constant="40" id="e9a-2V-Xcl"/>
+                            <constraint firstItem="nRr-AY-RWJ" firstAttribute="width" secondItem="RIP-tJ-aHO" secondAttribute="width" id="hHS-II-aKe"/>
+                            <constraint firstItem="RIP-tJ-aHO" firstAttribute="top" secondItem="A7Q-wS-DoK" secondAttribute="bottom" constant="40" id="ipA-zL-q2K"/>
+                            <constraint firstItem="A7Q-wS-DoK" firstAttribute="top" secondItem="R2E-w3-hve" secondAttribute="bottom" constant="8" id="rO2-p2-wVa"/>
                             <constraint firstItem="nRr-AY-RWJ" firstAttribute="centerX" secondItem="igu-2e-wIb" secondAttribute="centerX" id="vAU-QF-oQQ"/>
                             <constraint firstItem="nRr-AY-RWJ" firstAttribute="top" secondItem="lCF-jY-4vS" secondAttribute="bottom" constant="40" id="zDv-7x-ZMy"/>
                         </constraints>
@@ -91,6 +117,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="listDescripitionTextField" destination="RIP-tJ-aHO" id="BYx-Aj-nd7"/>
+                        <outlet property="listImageView" destination="A7Q-wS-DoK" id="9WY-Wk-4aH"/>
                         <outlet property="listNameTextField" destination="nRr-AY-RWJ" id="jqr-B0-zU0"/>
                     </connections>
                 </viewController>

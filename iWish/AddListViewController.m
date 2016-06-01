@@ -95,6 +95,7 @@
     if (![self.listNameTextField.text isEqualToString:@""]) {
         List *aList = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:appDelegate.managedObjectContext];
         aList.name = self.listNameTextField.text;
+        aList.details = self.listDescripitionTextField.text;
         
         aList.picture = [self savePictureToDisk];
         
@@ -105,7 +106,6 @@
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {

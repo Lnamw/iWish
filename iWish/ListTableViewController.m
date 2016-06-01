@@ -7,6 +7,7 @@
 //
 
 #import "ListTableViewController.h"
+#import "ListCell.h"
 
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
@@ -73,10 +74,13 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
+    ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
     
     List *aList = self.lists[indexPath.row];
-    cell.textLabel.text = aList.name;
+    cell.listNameLabel.text = aList.name;
+
+    UIImage *listImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:aList.picture]];
+    cell.listImageView.image = listImage;
     
     return cell;
 }

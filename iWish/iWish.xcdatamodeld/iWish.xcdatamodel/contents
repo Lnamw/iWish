@@ -4,6 +4,7 @@
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="lists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="List" inverseName="items" inverseEntity="List" syncable="YES"/>
     </entity>
@@ -14,7 +15,7 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="lists" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Item" positionX="88" positionY="-54" width="128" height="118"/>
+        <element name="Item" positionX="88" positionY="-54" width="128" height="133"/>
         <element name="List" positionX="-126" positionY="-45" width="128" height="105"/>
     </elements>
 </model>

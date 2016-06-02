@@ -43,11 +43,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-
-    
-    
-}
+//- (void)viewWillDisappear:(BOOL)animated {
+//    
+//    NSSet *test = [NSSet setWithArray:self.items];
+////    NSLog(@"%lu", (unsigned long)test.count);
+//    
+//    self.listSelected
+//    NSSet newSet  = [self.listSelected.items setByAddingObjectsFromArray:self.items];
+////    [test setByAddingObjectsFromArray:self.items];
+//    
+//    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+//    NSError *error = nil;
+//    [appDelegate.managedObjectContext save:&error];
+//    if (error) {
+//        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
+//    }
+//}
 
 /*
 #pragma mark - Navigation
@@ -126,10 +137,12 @@
         Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:appDelegate.managedObjectContext];
         anItem.name = self.itemNameTextField.text;
         anItem.details = self.itemDetailTextField.text;
+        long x = self.listSelected.items.count;
+        anItem.position = [NSNumber numberWithLong:x];
         
         anItem.picture = [self savePictureToDisk];
         
-        [self.items addObject:anItem];
+        [self.listSelected addItemsObject:anItem];
         
         NSError *error = nil;
         [appDelegate.managedObjectContext save:&error];

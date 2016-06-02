@@ -9,10 +9,16 @@
 #import "ItemTableViewController.h"
 #import "AddItemViewController.h"
 
+#import <CoreData/CoreData.h>
+#import "AppDelegate.h"
+
 #import "List.h"
 #import "Item.h"
 
 @interface ItemTableViewController ()
+
+@property (nonatomic, strong) NSMutableArray *lists;
+
 
 @end
 
@@ -24,10 +30,14 @@
     self.title = self.selectedList.name;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+    
+
 }
+
 
 #pragma mark - Table view data source
 
@@ -43,8 +53,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    NSArray *items = (NSArray *)self.selectedList.items;
-    Item *anItem = items[indexPath.row];
+    NSArray *items = [self.selectedList.items allObjects];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position"
+                                                                    ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+
+    NSArray *sortedItems = [items sortedArrayUsingDescriptors:sortDescriptors];
+    
+    Item *anItem = sortedItems[indexPath.row];
     cell.textLabel.text = anItem.name;
     
     return cell;
@@ -56,7 +73,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if ([segue.identifier isEqualToString:@"AddItemSegue"]) {
-        AddItemViewController *addItemVC = (AddItemViewController *)[segue destinationViewController];
+        
+        UINavigationController *navController = [segue destinationViewController];
+        AddItemViewController *addItemVC = (AddItemViewController *)([navController viewControllers][0]);
         
         addItemVC.listSelected = self.selectedList;
     }

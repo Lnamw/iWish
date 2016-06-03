@@ -49,16 +49,17 @@
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
     [self.scrollView addGestureRecognizer:gr];
-    
 }
 
 - (void) viewDidAppear:(BOOL)animated  {
-    self.originalContentInsets = self.scrollView.contentInset;
-    [self registerForKeyboardNotifications];
     
+    self.originalContentInsets = self.scrollView.contentInset;
+    
+    [self registerForKeyboardNotifications];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -90,7 +91,6 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
     self.activeField = textView;
-    
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
@@ -110,7 +110,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.itemImageView.image = image;
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -120,9 +119,8 @@
 
 #pragma mark - KeyBoard
 
-
-- (void)registerForKeyboardNotifications
-{
+- (void)registerForKeyboardNotifications {
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardDidShowNotification object:nil];
@@ -130,11 +128,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
-    
 }
 
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
+- (void)keyboardWasShown:(NSNotification*)aNotification {
+    
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
@@ -143,11 +140,8 @@
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
     
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your app might not need or want this behavior.
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    
     
     if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
         [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
@@ -155,8 +149,8 @@
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
+    
     self.scrollView.contentInset = self.originalContentInsets;
     self.scrollView.scrollIndicatorInsets = self.originalContentInsets;
     [self.scrollView scrollRectToVisible:CGRectZero animated:YES];
@@ -164,9 +158,9 @@
 
 #pragma  mark - Private
 
-- (NSString *)savePictureToDisk
-{
-    if (self.itemImageView.image) {
+- (NSString *)savePictureToDisk {
+    
+     if (self.itemImageView.image) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSUUID *uuid = [NSUUID UUID];
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];

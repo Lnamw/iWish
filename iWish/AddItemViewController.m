@@ -14,13 +14,13 @@
 #import "Item.h"
 #import "List.h"
 
-@interface AddItemViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddItemViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *items;
-
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
-@property (weak, nonatomic) IBOutlet UITextField *itemDetailTextField;
+@property (weak, nonatomic) IBOutlet UITextView *itemDetailsTextView;
+
 
 - (IBAction)addPictureButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
@@ -33,32 +33,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.items = [[NSMutableArray alloc] initWithObjects:self.listSelected.items, nil]; //(NSMutableArray *)self.selectedList.items;
+    
+    [self.itemDetailsTextView setDelegate:self];
 
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-//- (void)viewWillDisappear:(BOOL)animated {
-//    
-//    NSSet *test = [NSSet setWithArray:self.items];
-////    NSLog(@"%lu", (unsigned long)test.count);
-//    
-//    self.listSelected
-//    NSSet newSet  = [self.listSelected.items setByAddingObjectsFromArray:self.items];
-////    [test setByAddingObjectsFromArray:self.items];
-//    
-//    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-//    NSError *error = nil;
-//    [appDelegate.managedObjectContext save:&error];
-//    if (error) {
-//        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
-//    }
-//}
 
 /*
 #pragma mark - Navigation
@@ -82,6 +60,19 @@
     return rc;
 }
 
+//#pragma mark - TextView Delegate
+//
+//- (void)textViewDidBeginEditing:(UITextView *)textView {
+//    
+//    [self registerForKeyboardNotifications];
+//}
+//
+//- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+//    
+//    [textView resignFirstResponder];
+//    return YES;
+//}
+
 #pragma mark - UIImageControllerDelegate delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -96,6 +87,47 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+//#pragma mark - ScrollView
+//
+//
+//- (void)registerForKeyboardNotifications
+//{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWasShown:)
+//                                                 name:UIKeyboardDidShowNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillBeHidden:)
+//                                                 name:UIKeyboardWillHideNotification object:nil];
+//    
+//}
+//
+//- (void)keyboardWasShown:(NSNotification*)aNotification
+//{
+//    NSDictionary* info = [aNotification userInfo];
+//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+//    
+//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+//    self.scrollView.contentInset = contentInsets;
+//    self.scrollView.scrollIndicatorInsets = contentInsets;
+//    
+//    // If active text field is hidden by keyboard, scroll it so it's visible
+//    // Your app might not need or want this behavior.
+//    CGRect aRect = self.view.frame;
+//    aRect.size.height -= kbSize.height;
+//    if (!CGRectContainsPoint(aRect, self.itemDetailsTextView.frame.origin) ) {
+//        [self.scrollView scrollRectToVisible:self.itemDetailsTextView.frame animated:YES];
+//    }
+//}
+//
+//// Called when the UIKeyboardWillHideNotification is sent
+//- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+//{
+//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+//    self.scrollView.contentInset = contentInsets;
+//    self.scrollView.scrollIndicatorInsets = contentInsets;
+//}
 
 #pragma  mark - Private
 
@@ -136,7 +168,7 @@
     if (![self.itemNameTextField.text isEqualToString:@""]) {
         Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:appDelegate.managedObjectContext];
         anItem.name = self.itemNameTextField.text;
-        anItem.details = self.itemDetailTextField.text;
+        anItem.details = self.itemDetailsTextView.text;
         long x = self.listSelected.items.count;
         anItem.position = [NSNumber numberWithLong:x];
         

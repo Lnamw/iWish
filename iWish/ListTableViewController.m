@@ -27,7 +27,6 @@
     [super viewDidLoad];
     
     self.title = @"My Lists";
-    
 
     self.lists = [NSMutableArray array];
 }
@@ -57,12 +56,6 @@
     }
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -73,15 +66,11 @@
     return self.lists.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell" forIndexPath:indexPath];
     
     List *aList = self.lists[indexPath.row];
     cell.listNameLabel.text = aList.name;
-
-    UIImage *listImage = [UIImage imageWithData:[NSData dataWithContentsOfFile:aList.picture]];
-    cell.listImageView.image = listImage;
     
     return cell;
 }

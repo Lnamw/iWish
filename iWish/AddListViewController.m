@@ -13,15 +13,12 @@
 
 #import "List.h"
 
-@interface AddListViewController () <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface AddListViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *listNameTextField;
-@property (weak, nonatomic) IBOutlet UIImageView *listImageView;
-@property (weak, nonatomic) IBOutlet UITextField *listDescripitionTextField;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
-- (IBAction)addPictureButtonPressed:(id)sender;
 
 @end
 
@@ -30,11 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - TextField Delegate
@@ -59,34 +51,6 @@
 }
 */
 
-#pragma mark - UIImageControllerDelegate delegate
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    self.listImageView.image = image;
-
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma  mark - Private
-
-- (NSString *)savePictureToDisk
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSUUID *uuid = [NSUUID UUID];
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
-    
-    [UIImagePNGRepresentation(self.listImageView.image) writeToFile:filePath atomically:YES];
-    
-    return filePath;
-}
-
 #pragma mark - Action handlers
 
 - (IBAction)doneButtonPressed:(id)sender {
@@ -96,9 +60,6 @@
     if (![self.listNameTextField.text isEqualToString:@""]) {
         List *aList = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:appDelegate.managedObjectContext];
         aList.name = self.listNameTextField.text;
-        aList.details = self.listDescripitionTextField.text;
-        
-        aList.picture = [self savePictureToDisk];
         
         NSError *error = nil;
         [appDelegate.managedObjectContext save:&error];
@@ -113,22 +74,6 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (IBAction)addPictureButtonPressed:(id)sender {
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = NO;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-        [self presentViewController:picker animated:YES completion:nil];
-    }
-}
-
-
-
-
 
 @end
 

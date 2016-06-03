@@ -22,6 +22,7 @@
 		AAE763C31CFEDB3700051FC2 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763C21CFEDB3700051FC2 /* ListCell.m */; };
 		AAE763CC1CFF498A00051FC2 /* AddItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */; };
 		AAE763CF1CFF49A800051FC2 /* ItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763CE1CFF49A800051FC2 /* ItemTableViewController.m */; };
+		AAE763D51D0063A100051FC2 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763D41D0063A100051FC2 /* ItemCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddItemViewController.m; sourceTree = "<group>"; };
 		AAE763CD1CFF49A800051FC2 /* ItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemTableViewController.h; sourceTree = "<group>"; };
 		AAE763CE1CFF49A800051FC2 /* ItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemTableViewController.m; sourceTree = "<group>"; };
+		AAE763D31D0063A100051FC2 /* ItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
+		AAE763D41D0063A100051FC2 /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,8 @@
 			children = (
 				AAE763C11CFEDB3700051FC2 /* ListCell.h */,
 				AAE763C21CFEDB3700051FC2 /* ListCell.m */,
+				AAE763D31D0063A100051FC2 /* ItemCell.h */,
+				AAE763D41D0063A100051FC2 /* ItemCell.m */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 				AAE763A41CFE282000051FC2 /* AddListViewController.m in Sources */,
 				AAE763C31CFEDB3700051FC2 /* ListCell.m in Sources */,
 				AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */,
+				AAE763D51D0063A100051FC2 /* ItemCell.m in Sources */,
 				AACDCCBF1CFDFBBE001CB851 /* iWish.xcdatamodeld in Sources */,
 				AACDCCD41CFDFE11001CB851 /* List.m in Sources */,
 				AACDCCD31CFDFE11001CB851 /* List+CoreDataProperties.m in Sources */,

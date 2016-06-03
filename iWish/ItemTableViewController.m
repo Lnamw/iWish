@@ -8,6 +8,7 @@
 
 #import "ItemTableViewController.h"
 #import "AddItemViewController.h"
+#import "ItemCell.h"
 
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
@@ -18,7 +19,6 @@
 @interface ItemTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *lists;
-
 
 @end
 
@@ -34,10 +34,7 @@
     [super viewWillAppear:animated];
     
     [self.tableView reloadData];
-    
-
 }
-
 
 #pragma mark - Table view data source
 
@@ -51,22 +48,17 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-    
-    NSArray *items = [self.selectedList.items allObjects];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position"
-                                                                    ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    ItemCell *cell = (ItemCell *)[tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
 
-    NSArray *sortedItems = [items sortedArrayUsingDescriptors:sortDescriptors];
+    NSArray *sortedItems = [self sortItemsArray];
     
     Item *anItem = sortedItems[indexPath.row];
-    cell.textLabel.text = anItem.name;
+    cell.itemNameLabel.text = anItem.name;
+
+    cell.itemImageView.image = [self displayImage:anItem];
     
     return cell;
 }
-
 
 #pragma mark - Navigation
 
@@ -79,6 +71,31 @@
         
         addItemVC.listSelected = self.selectedList;
     }
+}
+
+#pragma mark - Private 
+
+- (NSArray *)sortItemsArray {
+    
+    NSArray *items = [self.selectedList.items allObjects];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"position"
+                                                                   ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedItems = [items sortedArrayUsingDescriptors:sortDescriptors];
+    
+    return sortedItems;
+}
+
+- (UIImage *)displayImage:(Item *)anItem {
+    
+    NSString *pathToImage = anItem.picture;
+    NSData *imageData = [NSData dataWithContentsOfFile:pathToImage];
+    UIImage *imageWithData = [UIImage imageWithData:imageData];
+    UIImage *imageToDisplay =[UIImage imageWithCGImage:[imageWithData CGImage]
+                                                 scale:[imageWithData scale]
+                                           orientation: UIImageOrientationRight];
+    
+    return imageToDisplay;
 }
 
 /*

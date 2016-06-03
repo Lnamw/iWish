@@ -16,6 +16,9 @@
 
 @interface AddItemViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (nonatomic) UITextView *activeField;
+@property (nonatomic) UIEdgeInsets originalContentInsets;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
@@ -35,7 +38,19 @@
     [super viewDidLoad];
     
     [self.itemDetailsTextView setDelegate:self];
+    
+    UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
+    [self.scrollView addGestureRecognizer:gr];
+    
+}
 
+- (void) viewDidAppear:(BOOL)animated  {
+    self.originalContentInsets = self.scrollView.contentInset;
+    [self registerForKeyboardNotifications];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /*
@@ -60,18 +75,21 @@
     return rc;
 }
 
-//#pragma mark - TextView Delegate
-//
-//- (void)textViewDidBeginEditing:(UITextView *)textView {
-//    
-//    [self registerForKeyboardNotifications];
-//}
-//
-//- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-//    
-//    [textView resignFirstResponder];
-//    return YES;
-//}
+#pragma mark - TextView Delegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    self.activeField = textView;
+    
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    
+    self.activeField = nil;
+
+    [textView resignFirstResponder];
+    return YES;
+}
 
 #pragma mark - UIImageControllerDelegate delegate
 
@@ -88,46 +106,49 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//#pragma mark - ScrollView
-//
-//
-//- (void)registerForKeyboardNotifications
-//{
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWasShown:)
-//                                                 name:UIKeyboardDidShowNotification object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillBeHidden:)
-//                                                 name:UIKeyboardWillHideNotification object:nil];
-//    
-//}
-//
-//- (void)keyboardWasShown:(NSNotification*)aNotification
-//{
-//    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    
-//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-//    self.scrollView.contentInset = contentInsets;
-//    self.scrollView.scrollIndicatorInsets = contentInsets;
-//    
-//    // If active text field is hidden by keyboard, scroll it so it's visible
-//    // Your app might not need or want this behavior.
-//    CGRect aRect = self.view.frame;
-//    aRect.size.height -= kbSize.height;
-//    if (!CGRectContainsPoint(aRect, self.itemDetailsTextView.frame.origin) ) {
-//        [self.scrollView scrollRectToVisible:self.itemDetailsTextView.frame animated:YES];
-//    }
-//}
-//
-//// Called when the UIKeyboardWillHideNotification is sent
-//- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-//{
-//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-//    self.scrollView.contentInset = contentInsets;
-//    self.scrollView.scrollIndicatorInsets = contentInsets;
-//}
+#pragma mark - KeyBoard
+
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.originalContentInsets.top, self.originalContentInsets.left, self.originalContentInsets.bottom + kbSize.height , self.originalContentInsets.right);
+    
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    
+    if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
+        [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    self.scrollView.contentInset = self.originalContentInsets;
+    self.scrollView.scrollIndicatorInsets = self.originalContentInsets;
+    [self.scrollView scrollRectToVisible:CGRectZero animated:YES];
+}
 
 #pragma  mark - Private
 
@@ -140,6 +161,11 @@
     [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
     
     return filePath;
+}
+
+- (void)grTapped:(id)sender {
+    
+    [self.scrollView endEditing:YES];
 }
 
 #pragma mark - Action handlers

@@ -116,7 +116,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COT-dM-CFC">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COT-dM-CFC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="620"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the name of you Item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QXr-8U-xjH">
@@ -136,9 +136,13 @@
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftbox-3" translatesAutoresizingMaskIntoConstraints="NO" id="LoT-gv-hud">
                                         <rect key="frame" x="18" y="136" width="128" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="M8K-id-sX6"/>
+                                            <constraint firstAttribute="width" constant="128" id="yxg-Yf-xdj"/>
+                                        </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Enter a description for your Item" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-iC-SJ4">
-                                        <rect key="frame" x="22" y="288" width="193.5" height="128"/>
+                                        <rect key="frame" x="22" y="304" width="193.5" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="wUy-Uk-Qw0"/>
@@ -151,7 +155,7 @@
                                         </connections>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="AAo-iC-SJ4" secondAttribute="bottom" constant="40" id="0IX-if-IQq"/>
                                     <constraint firstItem="QXr-8U-xjH" firstAttribute="top" secondItem="COT-dM-CFC" secondAttribute="topMargin" constant="20" id="3xV-XQ-Man"/>
@@ -161,13 +165,12 @@
                                     <constraint firstAttribute="trailing" secondItem="AAo-iC-SJ4" secondAttribute="trailing" constant="16" id="Hya-ch-GYz"/>
                                     <constraint firstItem="QXr-8U-xjH" firstAttribute="leading" secondItem="COT-dM-CFC" secondAttribute="leading" constant="18" id="cMQ-ze-sCa"/>
                                     <constraint firstItem="AAo-iC-SJ4" firstAttribute="leading" secondItem="COT-dM-CFC" secondAttribute="leading" constant="22" id="efO-tc-T9F"/>
-                                    <constraint firstItem="AAo-iC-SJ4" firstAttribute="top" secondItem="LoT-gv-hud" secondAttribute="bottom" constant="24" id="gbm-D6-YK3"/>
+                                    <constraint firstItem="AAo-iC-SJ4" firstAttribute="top" secondItem="LoT-gv-hud" secondAttribute="bottom" constant="40" id="gbm-D6-YK3"/>
                                     <constraint firstAttribute="trailing" secondItem="QXr-8U-xjH" secondAttribute="trailing" constant="18" id="nQI-rQ-sIZ"/>
                                     <constraint firstItem="LoT-gv-hud" firstAttribute="top" secondItem="6Qx-Fe-Q49" secondAttribute="bottom" constant="8" id="tC2-w7-a8X"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.99194208120000005" green="0.018485006920000002" blue="0.14331170900000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="yvD-eK-NXv" firstAttribute="top" secondItem="COT-dM-CFC" secondAttribute="bottom" constant="-20" id="Im2-KJ-R2I"/>
                             <constraint firstAttribute="trailing" secondItem="COT-dM-CFC" secondAttribute="trailing" id="OU9-8S-T1T"/>
@@ -203,52 +206,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUn-rs-Hda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3084" y="1633"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="DUt-Gj-Yel">
-            <objects>
-                <viewController id="tau-gl-3Qc" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="G8a-nu-c80"/>
-                        <viewControllerLayoutGuide type="bottom" id="Q3H-zL-Szj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HLN-eU-NIC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Op-Cj-igP">
-                                <rect key="frame" x="-20" y="0.0" width="640" height="620"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftbox-3" translatesAutoresizingMaskIntoConstraints="NO" id="XXu-6I-sdq">
-                                        <rect key="frame" x="20" y="20" width="1024" height="1024"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1024" id="8eF-ja-S4w"/>
-                                            <constraint firstAttribute="width" constant="1024" id="TAb-fT-ZP9"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="XXu-6I-sdq" secondAttribute="trailing" constant="20" id="SWN-5S-2UU"/>
-                                    <constraint firstItem="XXu-6I-sdq" firstAttribute="leading" secondItem="6Op-Cj-igP" secondAttribute="leading" constant="20" id="a7O-KA-oLm"/>
-                                    <constraint firstAttribute="bottom" secondItem="XXu-6I-sdq" secondAttribute="bottom" constant="20" id="fm2-N6-uXK"/>
-                                    <constraint firstItem="XXu-6I-sdq" firstAttribute="top" secondItem="6Op-Cj-igP" secondAttribute="top" constant="20" id="l3E-Du-OHE"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.65252743700000004" green="1" blue="0.064715545190000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="6Op-Cj-igP" firstAttribute="top" secondItem="G8a-nu-c80" secondAttribute="bottom" constant="-64" id="JI4-4i-3cI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6Op-Cj-igP" secondAttribute="trailing" constant="-40" id="hhc-mv-3SJ"/>
-                            <constraint firstItem="Q3H-zL-Szj" firstAttribute="top" secondItem="6Op-Cj-igP" secondAttribute="bottom" constant="-20" id="iD2-P4-s3k"/>
-                            <constraint firstItem="6Op-Cj-igP" firstAttribute="leading" secondItem="HLN-eU-NIC" secondAttribute="leadingMargin" constant="-40" id="qIL-H8-922"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="fO6-YK-L9f"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rLf-1t-aij" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3281" y="934"/>
         </scene>
         <!--Create a new List-->
         <scene sceneID="Ujs-Hp-Ho0">
@@ -351,24 +308,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZvM-6l-KZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2376" y="1633"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cY6-c4-0Bs">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZcF-T4-I5F" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5LY-At-Qh0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="tau-gl-3Qc" kind="relationship" relationship="rootViewController" id="Hhx-3U-WhW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wbg-Yc-pE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2469" y="934"/>
         </scene>
     </scenes>
     <resources>

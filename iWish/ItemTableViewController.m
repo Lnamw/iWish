@@ -99,8 +99,7 @@
                                                orientation: UIImageOrientationRight];
         
         return imageToDisplay;
-    }
-    else {
+    } else {
         UIImage *giftBoxImage = [UIImage imageNamed:@"giftbox-3"];
         
         return giftBoxImage;

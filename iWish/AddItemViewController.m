@@ -18,7 +18,9 @@
 
 @property (nonatomic) UITextView *activeField;
 @property (nonatomic) UIEdgeInsets originalContentInsets;
+@property (nonatomic) BOOL pictureTaken;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
@@ -39,6 +41,10 @@
     
     self.title = @"Add Item";
     
+    self.pictureTaken = NO;
+    
+    [self.doneButton setEnabled:NO];
+    
     [self.itemDetailsTextView setDelegate:self];
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
@@ -49,6 +55,7 @@
 - (void) viewDidAppear:(BOOL)animated  {
     self.originalContentInsets = self.scrollView.contentInset;
     [self registerForKeyboardNotifications];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -71,6 +78,7 @@
     
     BOOL rc = NO;
     if (![textField.text isEqualToString:@""]) {
+        [self.doneButton setEnabled:YES];
         [textField resignFirstResponder];
         rc = YES;
     }
@@ -96,6 +104,8 @@
 #pragma mark - UIImageControllerDelegate delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    self.pictureTaken = YES;
     
     [self dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
@@ -203,7 +213,11 @@
         long x = self.listSelected.items.count;
         anItem.position = [NSNumber numberWithLong:x];
         
-        anItem.picture = [self savePictureToDisk];
+        if (self.pictureTaken) {
+            anItem.picture = [self savePictureToDisk];
+        } else {
+            anItem.picture = nil;
+        }
         
         [self.listSelected addItemsObject:anItem];
         

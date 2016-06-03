@@ -134,7 +134,7 @@
                                             <action selector="addPictureButtonPressed:" destination="nS0-py-YcN" eventType="touchUpInside" id="xIP-lK-Yd6"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LoT-gv-hud">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftbox-3" translatesAutoresizingMaskIntoConstraints="NO" id="LoT-gv-hud">
                                         <rect key="frame" x="18" y="136" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="M8K-id-sX6"/>
@@ -197,6 +197,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneButton" destination="n4G-qN-i7M" id="rub-QG-ANO"/>
                         <outlet property="itemDetailsTextView" destination="AAo-iC-SJ4" id="Z8f-W0-UNC"/>
                         <outlet property="itemImageView" destination="LoT-gv-hud" id="yPE-KP-yuI"/>
                         <outlet property="itemNameTextField" destination="QXr-8U-xjH" id="KLU-xG-sry"/>
@@ -310,4 +311,7 @@
             <point key="canvasLocation" x="2376" y="1633"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="giftbox-3" width="128" height="128"/>
+    </resources>
 </document>

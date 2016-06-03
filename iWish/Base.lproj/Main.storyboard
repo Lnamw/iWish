@@ -116,11 +116,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COT-dM-CFC">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="COT-dM-CFC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="620"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the name of you Item" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QXr-8U-xjH">
-                                        <rect key="frame" x="18" y="28" width="195.5" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the name of you Item                  " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QXr-8U-xjH">
+                                        <rect key="frame" x="18" y="28" width="564" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                         <connections>
@@ -141,8 +141,8 @@
                                             <constraint firstAttribute="width" constant="128" id="yxg-Yf-xdj"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="Enter a description for your Item" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-iC-SJ4">
-                                        <rect key="frame" x="22" y="304" width="193.5" height="128"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" keyboardDismissMode="onDrag" text="Enter a description for your Item" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AAo-iC-SJ4">
+                                        <rect key="frame" x="22" y="304" width="550.5" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="wUy-Uk-Qw0"/>
@@ -163,6 +163,7 @@
                                     <constraint firstItem="6Qx-Fe-Q49" firstAttribute="top" secondItem="QXr-8U-xjH" secondAttribute="bottom" constant="40" id="FQF-Sm-QPG"/>
                                     <constraint firstItem="6Qx-Fe-Q49" firstAttribute="leading" secondItem="QXr-8U-xjH" secondAttribute="leading" id="HU2-tn-pLH"/>
                                     <constraint firstAttribute="trailing" secondItem="AAo-iC-SJ4" secondAttribute="trailing" constant="16" id="Hya-ch-GYz"/>
+                                    <constraint firstItem="QXr-8U-xjH" firstAttribute="centerX" secondItem="COT-dM-CFC" secondAttribute="centerX" id="S1C-oR-voX"/>
                                     <constraint firstItem="QXr-8U-xjH" firstAttribute="leading" secondItem="COT-dM-CFC" secondAttribute="leading" constant="18" id="cMQ-ze-sCa"/>
                                     <constraint firstItem="AAo-iC-SJ4" firstAttribute="leading" secondItem="COT-dM-CFC" secondAttribute="leading" constant="22" id="efO-tc-T9F"/>
                                     <constraint firstItem="AAo-iC-SJ4" firstAttribute="top" secondItem="LoT-gv-hud" secondAttribute="bottom" constant="40" id="gbm-D6-YK3"/>
@@ -196,6 +197,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="doneButton" destination="n4G-qN-i7M" id="rub-QG-ANO"/>
                         <outlet property="itemDetailsTextView" destination="AAo-iC-SJ4" id="Z8f-W0-UNC"/>

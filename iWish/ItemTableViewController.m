@@ -68,7 +68,7 @@
         
         UINavigationController *navController = [segue destinationViewController];
         AddItemViewController *addItemVC = (AddItemViewController *)([navController viewControllers][0]);
-        
+    
         addItemVC.listSelected = self.selectedList;
     }
 }
@@ -89,13 +89,23 @@
 - (UIImage *)displayImage:(Item *)anItem {
     
     NSString *pathToImage = anItem.picture;
-    NSData *imageData = [NSData dataWithContentsOfFile:pathToImage];
-    UIImage *imageWithData = [UIImage imageWithData:imageData];
-    UIImage *imageToDisplay =[UIImage imageWithCGImage:[imageWithData CGImage]
-                                                 scale:[imageWithData scale]
-                                           orientation: UIImageOrientationRight];
-    
-    return imageToDisplay;
+
+    if (pathToImage) {
+        NSData *imageData = [NSData dataWithContentsOfFile:pathToImage];
+        UIImage *imageWithData = [UIImage imageWithData:imageData];
+        
+        UIImage *imageToDisplay =[UIImage imageWithCGImage:[imageWithData CGImage]
+                                                     scale:[imageWithData scale]
+                                               orientation: UIImageOrientationRight];
+        
+        return imageToDisplay;
+    }
+    else {
+        UIImage *giftBoxImage = [UIImage imageNamed:@"giftbox-3"];
+        
+        return giftBoxImage;
+    }
+
 }
 
 /*

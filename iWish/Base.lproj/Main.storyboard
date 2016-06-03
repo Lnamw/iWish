@@ -70,15 +70,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="102.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rpR-hA-LCC">
+                                            <rect key="frame" x="36" y="15" width="69" height="75.5"/>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3GI-0Q-5da">
-                                            <rect key="frame" x="150" y="43" width="442" height="21"/>
+                                            <rect key="frame" x="150" y="38" width="442" height="27"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="giftbox-3" translatesAutoresizingMaskIntoConstraints="NO" id="rpR-hA-LCC">
-                                            <rect key="frame" x="36" y="15" width="69" height="75.5"/>
-                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
@@ -95,7 +95,7 @@
                     <navigationItem key="navigationItem" id="4Ii-j1-1Vk">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xGh-uM-xA0">
                             <connections>
-                                <segue destination="jU3-Ba-a8d" kind="presentation" id="bX4-D7-9qJ"/>
+                                <segue destination="jU3-Ba-a8d" kind="presentation" identifier="AddItemSegue" id="bX4-D7-9qJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -134,7 +134,7 @@
                                             <action selector="addPictureButtonPressed:" destination="nS0-py-YcN" eventType="touchUpInside" id="xIP-lK-Yd6"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="giftbox-3" translatesAutoresizingMaskIntoConstraints="NO" id="LoT-gv-hud">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LoT-gv-hud">
                                         <rect key="frame" x="18" y="136" width="128" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="M8K-id-sX6"/>
@@ -310,7 +310,4 @@
             <point key="canvasLocation" x="2376" y="1633"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="giftbox-3" width="128" height="128"/>
-    </resources>
 </document>

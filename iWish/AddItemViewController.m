@@ -37,6 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Add Item";
+    
     [self.itemDetailsTextView setDelegate:self];
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
@@ -154,13 +156,16 @@
 
 - (NSString *)savePictureToDisk
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSUUID *uuid = [NSUUID UUID];
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
-    
-    [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
-    
-    return filePath;
+    if (self.itemImageView.image) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSUUID *uuid = [NSUUID UUID];
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
+        
+        [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
+        
+        return filePath;
+    }
+    return nil;
 }
 
 - (void)grTapped:(id)sender {

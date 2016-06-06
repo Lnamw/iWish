@@ -83,12 +83,18 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     BOOL rc = NO;
+    [textField resignFirstResponder];
+    rc = YES;
+    return rc;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
     if (![textField.text isEqualToString:@""]) {
         [self.doneButton setEnabled:YES];
-        [textField resignFirstResponder];
-        rc = YES;
+    } else {
+        [self.doneButton setEnabled:NO];
     }
-    return rc;
 }
 
 #pragma mark - TextView Delegate

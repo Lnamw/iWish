@@ -18,6 +18,7 @@
 @property (nonatomic) AppDelegate *appDelegate;
 
 @property (weak, nonatomic) IBOutlet UITextField *listNameTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 - (IBAction)doneButtonPressed:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
@@ -28,6 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"Create a List";
+    
+    [self.doneButton setEnabled:NO];
 
     self.appDelegate = [UIApplication sharedApplication].delegate;
 }
@@ -37,11 +42,19 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     BOOL rc = NO;
-    if (![textField.text isEqualToString:@""]) {
-        [textField resignFirstResponder];
-        rc = YES;
-    }
+    [textField resignFirstResponder];
+    rc = YES;
+
     return rc;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    if (![textField.text isEqualToString:@""]) {
+        [self.doneButton setEnabled:YES];
+    } else {
+        [self.doneButton setEnabled:NO];
+    }
 }
 
 /*

@@ -15,6 +15,8 @@
 
 @interface AddListViewController () <UITextFieldDelegate>
 
+@property (nonatomic) AppDelegate *appDelegate;
+
 @property (weak, nonatomic) IBOutlet UITextField *listNameTextField;
 
 - (IBAction)doneButtonPressed:(id)sender;
@@ -26,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    self.appDelegate = [UIApplication sharedApplication].delegate;
 }
 
 #pragma mark - TextField Delegate
@@ -51,21 +54,26 @@
 }
 */
 
+#pragma mark - Private
+
+- (void)saveObject {
+    
+    NSError *error = nil;
+    [self.appDelegate.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
+    }
+}
+
 #pragma mark - Action handlers
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
     if (![self.listNameTextField.text isEqualToString:@""]) {
-        List *aList = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:appDelegate.managedObjectContext];
+        List *aList = [NSEntityDescription insertNewObjectForEntityForName:@"List" inManagedObjectContext:self.appDelegate.managedObjectContext];
         aList.name = self.listNameTextField.text;
-        
-        NSError *error = nil;
-        [appDelegate.managedObjectContext save:&error];
-        if (error) {
-            NSLog(@"Core Data could not save: %@", [error localizedDescription]);
-        }
+
+        [self saveObject];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

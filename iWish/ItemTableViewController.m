@@ -50,9 +50,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemCell *cell = (ItemCell *)[tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
 
-    NSArray *sortedItems = [self sortItemsArray];
-    
-    Item *anItem = sortedItems[indexPath.row];
+    Item *anItem = [self giveMeItemAtIndexPath:indexPath];
     cell.itemNameLabel.text = anItem.name;
 
     cell.itemImageView.image = [self displayImage:anItem];
@@ -65,27 +63,20 @@
     return YES;
 }
 
-
+#pragma mark - tableView Delegate
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [tableView beginUpdates];
-    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
-        NSArray *items = [self.selectedList.items allObjects];
-        NSMutableArray *itemsMutable = [[NSMutableArray arrayWithArray:items] mutableCopy];
 
-        [itemsMutable removeObjectAtIndex:indexPath.row];
+        Item *anItem = [self giveMeItemAtIndexPath:indexPath];
+        [self.selectedList removeItemsObject:anItem];
+        
+        [self saveObject];
+
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-
-    [tableView endUpdates];
-
 }
 
 #pragma mark - Navigation
@@ -114,6 +105,14 @@
     return sortedItems;
 }
 
+- (Item *)giveMeItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSArray *sortedItems = [self sortItemsArray];
+    Item *anItem = sortedItems[indexPath.row];
+    
+    return anItem;
+}
+
 - (UIImage *)displayImage:(Item *)anItem {
     
     NSString *pathToImage = anItem.picture;
@@ -131,6 +130,17 @@
         UIImage *giftBoxImage = [UIImage imageNamed:@"giftbox-3"];
         
         return giftBoxImage;
+    }
+}
+
+- (void)saveObject {
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    
+    NSError *error = nil;
+    [appDelegate.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
     }
 }
 

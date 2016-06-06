@@ -16,6 +16,8 @@
 
 @interface AddItemViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (nonatomic) AppDelegate *appDelegate;
+
 @property (nonatomic) UITextView *activeField;
 @property (nonatomic) UIEdgeInsets originalContentInsets;
 @property (nonatomic) BOOL pictureTaken;
@@ -49,6 +51,9 @@
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
     [self.scrollView addGestureRecognizer:gr];
+    
+    self.appDelegate = [UIApplication sharedApplication].delegate;
+
 }
 
 - (void) viewDidAppear:(BOOL)animated  {
@@ -177,6 +182,15 @@
     [self.scrollView endEditing:YES];
 }
 
+- (void)saveObject {
+    
+    NSError *error = nil;
+    [self.appDelegate.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
+    }
+}
+
 #pragma mark - Action handlers
 
 - (IBAction)addPictureButtonPressed:(id)sender {
@@ -197,11 +211,9 @@
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
-
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     
     if (![self.itemNameTextField.text isEqualToString:@""]) {
-        Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:appDelegate.managedObjectContext];
+        Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.appDelegate.managedObjectContext];
         anItem.name = self.itemNameTextField.text;
         anItem.details = self.itemDetailsTextView.text;
         long x = self.listSelected.items.count;
@@ -215,11 +227,7 @@
         
         [self.listSelected addItemsObject:anItem];
         
-        NSError *error = nil;
-        [appDelegate.managedObjectContext save:&error];
-        if (error) {
-            NSLog(@"Core Data could not save: %@", [error localizedDescription]);
-        }
+        [self saveObject];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

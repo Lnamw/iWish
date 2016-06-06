@@ -13,12 +13,16 @@
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
 
+#import <MessageUI/MFMailComposeViewController.h>
+
 #import "List.h"
 #import "Item.h"
 
-@interface ItemTableViewController ()
+@interface ItemTableViewController () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *lists;
+
+- (IBAction)shareList:(id)sender;
 
 @end
 
@@ -92,6 +96,14 @@
     }
 }
 
+#pragma mark - Mail compose controller delegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Private 
 
 - (NSArray *)sortItemsArray {
@@ -144,9 +156,55 @@
     }
 }
 
+- (NSArray *)giveMeItemsForMail {
+    
+    NSArray *sortedItems = [self sortItemsArray];
+    NSMutableArray *itemsForMail = [[NSMutableArray alloc] init];
+    
+    for (Item *anItem in sortedItems) {
+        [itemsForMail addObject:[NSString stringWithFormat:@"%@,\n Details: %@", anItem.name, anItem.details]];
+    }
+    return itemsForMail;
+}
 
+#pragma mark - Action handlers
+
+- (IBAction)shareList:(id)sender {
+    
+    if (![MFMailComposeViewController canSendMail]) {
+        NSLog(@"Mail services are not available.");
+        return;
+    } else {
+        MFMailComposeViewController *composeVC = [[MFMailComposeViewController alloc] init];
+        composeVC.mailComposeDelegate = self;
+        
+        NSArray *itemsForMail = [self giveMeItemsForMail];
+        
+        // Configure the fields of the interface.
+        [composeVC setSubject:@"Here is my Wishlist"];
+        [composeVC setMessageBody:[NSString stringWithFormat:@"Hey! \n\n If you don't want to spend too much time looking for the perfect gift, you can pick one (or more ;)) in this list:\n\n %@ \n\n Thank you!", [itemsForMail componentsJoinedByString:@"\n\n"]] isHTML:NO];
+        
+        // Present the view controller modally.
+        [self presentViewController:composeVC animated:YES completion:nil];
+    }
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

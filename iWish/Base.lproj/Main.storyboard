@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--List Table View Controller-->
@@ -92,11 +93,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="4Ii-j1-1Vk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="xGh-uM-xA0">
-                            <connections>
-                                <segue destination="jU3-Ba-a8d" kind="presentation" identifier="AddItemSegue" id="bX4-D7-9qJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="xGh-uM-xA0">
+                                <connections>
+                                    <segue destination="jU3-Ba-a8d" kind="presentation" identifier="AddItemSegue" id="bX4-D7-9qJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="action" id="qaN-SQ-CxQ">
+                                <connections>
+                                    <action selector="shareList:" destination="kE2-AW-joW" id="Eul-r5-b9Q"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="khy-Pc-FhJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

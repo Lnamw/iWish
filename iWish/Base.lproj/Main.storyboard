@@ -134,8 +134,12 @@
                                             <outlet property="delegate" destination="nS0-py-YcN" id="ntq-Nv-g0A"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qx-Fe-Q49">
-                                        <rect key="frame" x="22" y="98" width="87" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qx-Fe-Q49">
+                                        <rect key="frame" x="22" y="98" width="124" height="169"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="169" id="6XT-2N-8nL"/>
+                                            <constraint firstAttribute="width" constant="124" id="ycY-HZ-4BQ"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Add Picture:">
                                             <color key="titleColor" red="0.90588235289999997" green="0.29803921570000003" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,12 +203,14 @@
                                     <constraint firstItem="1hv-WJ-kSd" firstAttribute="top" secondItem="COT-dM-CFC" secondAttribute="top" constant="19" id="e1v-eN-gJC"/>
                                     <constraint firstItem="AAo-iC-SJ4" firstAttribute="leading" secondItem="COT-dM-CFC" secondAttribute="leading" constant="22" id="efO-tc-T9F"/>
                                     <constraint firstItem="AAo-iC-SJ4" firstAttribute="top" secondItem="LoT-gv-hud" secondAttribute="bottom" constant="60" id="gbm-D6-YK3"/>
+                                    <constraint firstItem="LoT-gv-hud" firstAttribute="top" secondItem="QXr-8U-xjH" secondAttribute="bottom" constant="61" id="jgg-AS-opH"/>
                                     <constraint firstItem="TFu-H9-SsM" firstAttribute="leading" secondItem="COT-dM-CFC" secondAttribute="leading" constant="22" id="lO7-pN-J5j"/>
                                     <constraint firstAttribute="trailing" secondItem="QXr-8U-xjH" secondAttribute="trailing" constant="18" id="nQI-rQ-sIZ"/>
                                     <constraint firstItem="LoT-gv-hud" firstAttribute="top" secondItem="6Qx-Fe-Q49" secondAttribute="bottom" constant="8" id="tC2-w7-a8X"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="tC2-w7-a8X"/>
                                         <exclude reference="gbm-D6-YK3"/>
                                     </mask>
                                 </variation>

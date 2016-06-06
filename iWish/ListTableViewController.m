@@ -18,6 +18,7 @@
 @interface ListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *lists;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -29,18 +30,18 @@
     self.title = @"My Lists";
 
     self.lists = [NSMutableArray array];
+    
+    self.appDelegate = [UIApplication sharedApplication].delegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"List" inManagedObjectContext:appDelegate.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"List" inManagedObjectContext:self.appDelegate.managedObjectContext];
     [request setEntity:entity];
     NSError *error = nil;
-    NSArray *fetchResults = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
+    NSArray *fetchResults = [self.appDelegate.managedObjectContext executeFetchRequest:request error:&error];
     if (error) {
         // Fetch request encountered error
         NSLog(@"Fetch request failed: %@", [error localizedDescription]);
@@ -75,6 +76,27 @@
     return cell;
 }
 
+#pragma mark - tableView Delegate
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        List *aList = self.lists[indexPath.row];
+        [self.appDelegate.managedObjectContext deleteObject:aList];
+        [self saveObject];
+        [self.lists removeObjectAtIndex:indexPath.row];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -86,6 +108,17 @@
         List *selectedList = self.lists[cellIndexPath.row];
         
         itemTVC.selectedList = selectedList;
+    }
+}
+
+#pragma mark - Private 
+
+- (void)saveObject {
+    
+    NSError *error = nil;
+    [self.appDelegate.managedObjectContext save:&error];
+    if (error) {
+        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
     }
 }
 

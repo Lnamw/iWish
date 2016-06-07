@@ -54,7 +54,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ItemCell *cell = (ItemCell *)[tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
 
-    Item *anItem = [self giveMeItemAtIndexPath:indexPath];
+    Item *anItem = [self ItemAtIndexPath:indexPath];
     cell.itemNameLabel.text = anItem.name;
 
     cell.itemImageView.image = [self displayImage:anItem];
@@ -74,7 +74,7 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 
-        Item *anItem = [self giveMeItemAtIndexPath:indexPath];
+        Item *anItem = [self ItemAtIndexPath:indexPath];
         [self.selectedList removeItemsObject:anItem];
         
         [self saveObject];
@@ -117,7 +117,7 @@
     return sortedItems;
 }
 
-- (Item *)giveMeItemAtIndexPath:(NSIndexPath *)indexPath {
+- (Item *)ItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSArray *sortedItems = [self sortItemsArray];
     Item *anItem = sortedItems[indexPath.row];
@@ -156,15 +156,20 @@
     }
 }
 
-- (NSArray *)giveMeItemsForMail {
+- (NSArray *)emailItemsDescription {
     
     NSArray *sortedItems = [self sortItemsArray];
-    NSMutableArray *itemsForMail = [[NSMutableArray alloc] init];
+    NSMutableArray *itemsDescription = [[NSMutableArray alloc] init];
     
     for (Item *anItem in sortedItems) {
-        [itemsForMail addObject:[NSString stringWithFormat:@"%@,\n Details: %@", anItem.name, anItem.details]];
+        NSMutableString *emailString = [[NSMutableString alloc] init];
+        [emailString appendString: anItem.name];
+        if (![anItem.details isEqualToString:@""]) {
+            [emailString appendFormat:@"\n %@", anItem.details];
+        }
+        [itemsDescription addObject:emailString];
     }
-    return itemsForMail;
+    return itemsDescription;
 }
 
 #pragma mark - Action handlers
@@ -178,11 +183,11 @@
         MFMailComposeViewController *composeVC = [[MFMailComposeViewController alloc] init];
         composeVC.mailComposeDelegate = self;
         
-        NSArray *itemsForMail = [self giveMeItemsForMail];
+        NSArray *itemsDescription = [self emailItemsDescription];
         
         // Configure the fields of the interface.
         [composeVC setSubject:@"Here is my Wishlist"];
-        [composeVC setMessageBody:[NSString stringWithFormat:@"Hey! \n\n If you don't want to spend too much time looking for the perfect gift, you can pick one (or more ;)) in this list:\n\n %@ \n\n Thank you!", [itemsForMail componentsJoinedByString:@"\n\n"]] isHTML:NO];
+        [composeVC setMessageBody:[NSString stringWithFormat:@"Hey! \n\n If you don't want to spend too much time looking for the perfect gift, you can pick one (or more ;)) in this list:\n\n %@ \n\n Thank you!", [itemsDescription componentsJoinedByString:@"\n\n"]] isHTML:NO];
         
         // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];

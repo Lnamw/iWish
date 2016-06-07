@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AABDF2B31D06E2C3002FE238 /* iWishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABDF2B21D06E2C3002FE238 /* iWishTests.m */; };
+		AABDF2BB1D06E2FD002FE238 /* ItemTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABDF2BA1D06E2FD002FE238 /* ItemTableViewControllerTests.m */; };
 		AACDCCB31CFDFBBE001CB851 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB21CFDFBBE001CB851 /* main.m */; };
 		AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB51CFDFBBE001CB851 /* AppDelegate.m */; };
 		AACDCCBC1CFDFBBE001CB851 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */; };
@@ -25,7 +27,21 @@
 		AAE763D51D0063A100051FC2 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763D41D0063A100051FC2 /* ItemCell.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AABDF2B51D06E2C3002FE238 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AACDCCA61CFDFBBE001CB851 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AACDCCAD1CFDFBBE001CB851;
+			remoteInfo = iWish;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		AABDF2B01D06E2C3002FE238 /* iWishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABDF2B21D06E2C3002FE238 /* iWishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iWishTests.m; sourceTree = "<group>"; };
+		AABDF2B41D06E2C3002FE238 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AABDF2BA1D06E2FD002FE238 /* ItemTableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemTableViewControllerTests.m; path = iWishTests/ItemTableViewControllerTests.m; sourceTree = SOURCE_ROOT; };
 		AACDCCAE1CFDFBBE001CB851 /* iWish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iWish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACDCCB21CFDFBBE001CB851 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AACDCCB41CFDFBBE001CB851 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +74,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AABDF2AD1D06E2C3002FE238 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AACDCCAB1CFDFBBE001CB851 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,10 +91,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AABDF2B11D06E2C3002FE238 /* iWishTests */ = {
+			isa = PBXGroup;
+			children = (
+				AABDF2B21D06E2C3002FE238 /* iWishTests.m */,
+				AABDF2B41D06E2C3002FE238 /* Info.plist */,
+			);
+			path = iWishTests;
+			sourceTree = "<group>";
+		};
 		AACDCCA51CFDFBBE001CB851 = {
 			isa = PBXGroup;
 			children = (
 				AACDCCB01CFDFBBE001CB851 /* iWish */,
+				AABDF2B11D06E2C3002FE238 /* iWishTests */,
 				AACDCCAF1CFDFBBE001CB851 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				AACDCCAE1CFDFBBE001CB851 /* iWish.app */,
+				AABDF2B01D06E2C3002FE238 /* iWishTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +204,7 @@
 			children = (
 				AAE763CD1CFF49A800051FC2 /* ItemTableViewController.h */,
 				AAE763CE1CFF49A800051FC2 /* ItemTableViewController.m */,
+				AABDF2BA1D06E2FD002FE238 /* ItemTableViewControllerTests.m */,
 				AAE763CA1CFF498A00051FC2 /* AddItemViewController.h */,
 				AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */,
 			);
@@ -179,6 +214,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AABDF2AF1D06E2C3002FE238 /* iWishTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABDF2B91D06E2C3002FE238 /* Build configuration list for PBXNativeTarget "iWishTests" */;
+			buildPhases = (
+				AABDF2AC1D06E2C3002FE238 /* Sources */,
+				AABDF2AD1D06E2C3002FE238 /* Frameworks */,
+				AABDF2AE1D06E2C3002FE238 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AABDF2B61D06E2C3002FE238 /* PBXTargetDependency */,
+			);
+			name = iWishTests;
+			productName = iWishTests;
+			productReference = AABDF2B01D06E2C3002FE238 /* iWishTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		AACDCCAD1CFDFBBE001CB851 /* iWish */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AACDCCC81CFDFBBE001CB851 /* Build configuration list for PBXNativeTarget "iWish" */;
@@ -205,6 +258,10 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Elena;
 				TargetAttributes = {
+					AABDF2AF1D06E2C3002FE238 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = AACDCCAD1CFDFBBE001CB851;
+					};
 					AACDCCAD1CFDFBBE001CB851 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = D6JSDY96LP;
@@ -225,11 +282,19 @@
 			projectRoot = "";
 			targets = (
 				AACDCCAD1CFDFBBE001CB851 /* iWish */,
+				AABDF2AF1D06E2C3002FE238 /* iWishTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AABDF2AE1D06E2C3002FE238 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AACDCCAC1CFDFBBE001CB851 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,6 +308,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AABDF2AC1D06E2C3002FE238 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABDF2BB1D06E2FD002FE238 /* ItemTableViewControllerTests.m in Sources */,
+				AABDF2B31D06E2C3002FE238 /* iWishTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AACDCCAA1CFDFBBE001CB851 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,6 +339,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AABDF2B61D06E2C3002FE238 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AACDCCAD1CFDFBBE001CB851 /* iWish */;
+			targetProxy = AABDF2B51D06E2C3002FE238 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -285,6 +367,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AABDF2B71D06E2C3002FE238 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iWishTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWishTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iWish.app/iWish";
+			};
+			name = Debug;
+		};
+		AABDF2B81D06E2C3002FE238 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = iWishTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWishTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iWish.app/iWish";
+			};
+			name = Release;
+		};
 		AACDCCC61CFDFBBE001CB851 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -400,6 +506,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AABDF2B91D06E2C3002FE238 /* Build configuration list for PBXNativeTarget "iWishTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABDF2B71D06E2C3002FE238 /* Debug */,
+				AABDF2B81D06E2C3002FE238 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		AACDCCA91CFDFBBE001CB851 /* Build configuration list for PBXProject "iWish" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

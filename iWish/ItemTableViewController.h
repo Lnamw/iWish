@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) List *selectedList;
 
+- (NSArray *)sortItemsArray;
+
 @end

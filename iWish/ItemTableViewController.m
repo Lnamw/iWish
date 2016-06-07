@@ -75,11 +75,20 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 
         Item *anItem = [self ItemAtIndexPath:indexPath];
-        [self.selectedList removeItemsObject:anItem];
         
-        [self saveObject];
+        [self.selectedList removeItemsObject:anItem];
 
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSArray *sortedItems = [self sortItemsArray];
+        
+        int i = 1;
+        for (Item *anItem in sortedItems) {
+            anItem.position = @(i);
+            i++;
+        }
+        
+        [self saveObject];
     }
 }
 

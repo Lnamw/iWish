@@ -128,11 +128,10 @@
 - (UIImage *)displayImage:(Item *)anItem {
     
     NSString *pathToImage = anItem.picture;
-
-    if (pathToImage) {
-        NSData *imageData = [NSData dataWithContentsOfFile:pathToImage];
-        UIImage *imageWithData = [UIImage imageWithData:imageData];
+    NSData *imageData = [NSData dataWithContentsOfFile:pathToImage];
+    UIImage *imageWithData = [UIImage imageWithData:imageData];
         
+    if (imageWithData) {
         UIImage *imageToDisplay =[UIImage imageWithCGImage:[imageWithData CGImage]
                                                      scale:[imageWithData scale]
                                                orientation: UIImageOrientationRight];

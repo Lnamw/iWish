@@ -48,13 +48,20 @@
     return rc;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    if (![textField.text isEqualToString:@""]) {
+    if (textField.text.length > 1 || (string.length > 0 && ![string isEqualToString:@""])) {
         [self.doneButton setEnabled:YES];
     } else {
         [self.doneButton setEnabled:NO];
     }
+    return YES;
+}
+
+-(BOOL)textFieldShouldClear:(UITextField *)textField {
+    
+    [self.doneButton setEnabled:NO];
+    return YES;
 }
 
 /*

@@ -171,9 +171,11 @@
     
     for (Item *anItem in sortedItems) {
         NSMutableString *emailString = [[NSMutableString alloc] init];
-        [emailString appendString: anItem.name];
         if (![anItem.details isEqualToString:@""]) {
-            [emailString appendFormat:@"\n %@", anItem.details];
+            [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong>%@</font></strong></li>", anItem.name];
+            [emailString appendFormat:@"\n %@</ul>", anItem.details];
+        } else {
+            [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong>%@</strong></font></li></ul>", anItem.name];
         }
         [itemsDescription addObject:emailString];
     }
@@ -195,7 +197,7 @@
         
         // Configure the fields of the interface.
         [composeVC setSubject:@"Here is my Wishlist"];
-        [composeVC setMessageBody:[NSString stringWithFormat:@"Hey! \n\n If you don't want to spend too much time looking for the perfect gift, you can pick one (or more ;)) in this list:\n\n %@ \n\n Thank you!", [itemsDescription componentsJoinedByString:@"\n\n"]] isHTML:NO];
+        [composeVC setMessageBody:[NSString stringWithFormat:@"<header style=\"background-color:#e74c3c;padding:1px\"><center><h3><font color=\"white\">iWish</h3></font></center></header> <h4>Hey!</h4> \n\n <p>If you don't want to spend too much time looking for the perfect gift, you can pick one (or more ;)) in this list:</p> <p>\n\n %@ \n\n </p> <h4>Thank you!</h4><footer style=\"background-color:#e74c3c;padding:3px\"><center><font color=\"white\">iWish - share your wish lists with your family and friends!</font></center></footer>", [itemsDescription componentsJoinedByString:@"\n\n"]] isHTML:YES];
         
         // Present the view controller modally.
         [self presentViewController:composeVC animated:YES completion:nil];

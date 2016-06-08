@@ -513,6 +513,7 @@
 				AABDF2B81D06E2C3002FE238 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AACDCCA91CFDFBBE001CB851 /* Build configuration list for PBXProject "iWish" */ = {
 			isa = XCConfigurationList;

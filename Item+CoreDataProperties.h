@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.h
 //  iWish
 //
-//  Created by Elena Maso Willen on 02/06/2016.
+//  Created by Elena Maso Willen on 08/06/2016.
 //  Copyright © 2016 Elena. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,8 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *details;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *picture;
-@property (nullable, nonatomic, retain) NSNumber *price;
 @property (nullable, nonatomic, retain) NSNumber *position;
+@property (nullable, nonatomic, retain) NSNumber *price;
+@property (nullable, nonatomic, retain) NSString *url;
 @property (nullable, nonatomic, retain) NSSet<List *> *lists;
 
 @end

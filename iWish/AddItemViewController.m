@@ -19,6 +19,8 @@
 @property (nonatomic) AppDelegate *appDelegate;
 
 @property (nonatomic) UITextView *activeField;
+//@property (nonatomic) UITextField *activeTextField;
+
 @property (nonatomic) UIEdgeInsets originalContentInsets;
 @property (nonatomic) BOOL pictureTaken;
 
@@ -27,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *itemImageView;
 @property (weak, nonatomic) IBOutlet UITextView *itemDetailsTextView;
+@property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 
 
 - (IBAction)addPictureButtonPressed:(id)sender;
@@ -90,19 +93,33 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 
-    if (textField.text.length > 1 || (string.length > 0 && ![string isEqualToString:@""])) {
-        [self.doneButton setEnabled:YES];
-    } else {
-        [self.doneButton setEnabled:NO];
+    if (textField == self.itemNameTextField) {
+        if (self.itemNameTextField.text.length > 1 || (string.length > 0 && ![string isEqualToString:@""])) {
+            [self.doneButton setEnabled:YES];
+        } else {
+            [self.doneButton setEnabled:NO];
+        }
     }
+//    if (textField == self.urlTextField) {
+//        self.activeTextField = textField;
+//    }
+    
     return YES;
 }
 
 -(BOOL)textFieldShouldClear:(UITextField *)textField {
     
-    [self.doneButton setEnabled:NO];
+    if (textField == self.itemNameTextField) {
+        [self.doneButton setEnabled:NO];
+    }
     return YES;
 }
+
+//-(BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+//    
+//    self.activeTextField = nil;
+//    return YES;
+//}
 
 #pragma mark - TextView Delegate
 
@@ -164,6 +181,9 @@
     if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
         [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
     }
+//    if (CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeTextField.frame)) {
+//        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
+//    }
 }
 
 // Called when the UIKeyboardWillHideNotification is sent

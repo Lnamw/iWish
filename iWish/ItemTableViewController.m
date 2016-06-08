@@ -171,15 +171,23 @@
     
     for (Item *anItem in sortedItems) {
         NSMutableString *emailString = [[NSMutableString alloc] init];
-        if (![anItem.details isEqualToString:@""]) {
-            [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong>%@</font></strong>", anItem.name];
-            [emailString appendFormat:@"<br> %@", anItem.details];
-        } else {
-            [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong> %@</strong></font>", anItem.name];
-        }
         if (![anItem.url isEqualToString:@""]) {
-            [emailString appendFormat:@"<br> %@", anItem.url];
+            [emailString appendFormat:@"<ul><li><a href=\"%@\"><font color=\"#e74c3c\"><strong>%@ </strong></font></a>", anItem.url, anItem.name];
+        } else {
+            [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong>%@ </strong></font>", anItem.name];
         }
+//        if (![anItem.url isEqualToString:@""]) {
+//            [emailString appendFormat:@"<a href=\"%@\">(see product)</a>", anItem.url];
+//        }
+        if (![anItem.details isEqualToString:@""]) {
+            [emailString appendFormat:@"<br> %@", anItem.details];
+        }
+//        } else {
+//            [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong>%@</strong></font><a href=\"%@\">(see product)</a>", anItem.name, anItem.url];
+//        }
+//        if (![anItem.url isEqualToString:@""]) {
+//            [emailString appendFormat:@"<br> %@", anItem.url];
+//        }
         [emailString appendString:@"</li></ul>"];
         
         NSLog(@"%@", emailString);

@@ -19,8 +19,8 @@
 @property (nonatomic) AppDelegate *appDelegate;
 
 @property (nonatomic) UITextView *activeField;
-//@property (nonatomic) UITextField *activeTextField;
-
+@property (nonatomic) UITextField *activeTextField;
+@property (nonatomic) BOOL isValidUrl;
 @property (nonatomic) UIEdgeInsets originalContentInsets;
 @property (nonatomic) BOOL pictureTaken;
 
@@ -100,10 +100,6 @@
             [self.doneButton setEnabled:NO];
         }
     }
-//    if (textField == self.urlTextField) {
-//        self.activeTextField = textField;
-//    }
-    
     return YES;
 }
 
@@ -115,11 +111,21 @@
     return YES;
 }
 
-//-(BOOL) textFieldShouldEndEditing:(UITextField *)textField {
-//    
-//    self.activeTextField = nil;
-//    return YES;
-//}
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    if (textField == self.urlTextField) {
+        self.activeTextField = textField;
+    }
+}
+
+-(BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+    
+    if (textField == self.urlTextField) {
+        
+        self.activeTextField = nil;
+    }
+    return YES;
+}
 
 #pragma mark - TextView Delegate
 
@@ -181,9 +187,9 @@
     if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
         [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
     }
-//    if (CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeTextField.frame)) {
-//        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
-//    }
+    if (CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeTextField.frame)) {
+        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
+    }
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
@@ -224,6 +230,35 @@
     }
 }
 
+- (BOOL) isValidUrl {
+    
+    self.isValidUrl = NO;
+        NSURL* url = [NSURL URLWithString:self.urlTextField.text];
+        if (url && url.scheme && url.host) {
+            NSLog(@"YES %@ is a proper URL", self.urlTextField.text);
+            self.isValidUrl = YES;
+            return YES;
+        } else {
+            NSLog(@"Nope %@ is not a proper URL", self.urlTextField.text);
+            self.isValidUrl = NO;
+            return NO;
+        }
+    return self.isValidUrl;
+}
+
+- (void) showUrlAlert {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Url invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        //
+    }];
+    
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
 #pragma mark - Action handlers
 
 - (IBAction)addPictureButtonPressed:(id)sender {
@@ -245,13 +280,19 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-    if (![self.itemNameTextField.text isEqualToString:@""]) {
+    if (self.urlTextField.text.length >= 1) {
+
+        [self isValidUrl];
+    }
+            
+    if (self.isValidUrl || self.urlTextField.text.length == 0) {
         Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.appDelegate.managedObjectContext];
         anItem.name = self.itemNameTextField.text;
         anItem.details = self.itemDetailsTextView.text;
+        anItem.url = self.urlTextField.text;
         long x = self.listSelected.items.count;
         anItem.position = [NSNumber numberWithLong:x];
-        
+                
         if (self.pictureTaken) {
             anItem.picture = [self savePictureToDisk];
         } else {
@@ -259,11 +300,16 @@
         }
         
         [self.listSelected addItemsObject:anItem];
-        
+    
         [self saveObject];
         [self dismissViewControllerAnimated:YES completion:nil];
+            
+    } else {
+        [self showUrlAlert];
     }
 }
+
+
 
 
 @end

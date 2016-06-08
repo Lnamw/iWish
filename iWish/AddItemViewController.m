@@ -173,31 +173,68 @@
 
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+//    NSDictionary* info = [aNotification userInfo];
+//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.originalContentInsets.top, self.originalContentInsets.left, self.originalContentInsets.bottom + kbSize.height , self.originalContentInsets.right);
+//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.originalContentInsets.top, self.originalContentInsets.left, self.originalContentInsets.bottom + kbSize.height , self.originalContentInsets.right);
     
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
+//    self.scrollView.contentInset = contentInsets;
+//    self.scrollView.scrollIndicatorInsets = contentInsets;
     
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
+//    NSDictionary* info = [aNotification userInfo];
+//    CGRect keyPadFrame=[[UIApplication sharedApplication].keyWindow convertRect:[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue] fromView:self.view];
+//    CGSize kbSize =keyPadFrame.size;
     
-    if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
-        [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+    if (self.activeField) {
+        NSDictionary* info = [aNotification userInfo];
+        CGRect keyPadFrame=[[UIApplication sharedApplication].keyWindow convertRect:[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue] fromView:self.view];
+        CGSize kbSize =keyPadFrame.size;
+        CGRect activeRect=[self.view convertRect:self.activeField.frame fromView:self.activeField.superview];
+        CGRect aRect = self.view.bounds;
+        aRect.size.height -= (kbSize.height);
+        CGPoint origin =  activeRect.origin;
+        origin.y -= self.scrollView.contentOffset.y;
+        if (!CGRectContainsPoint(aRect, origin)) {
+            CGPoint scrollPoint = CGPointMake(0.0,CGRectGetMaxY(activeRect)-(aRect.size.height));
+            [self.scrollView setContentOffset:scrollPoint animated:YES];
+        }
+    } else if (self.activeTextField) {
+        NSDictionary* info = [aNotification userInfo];
+        CGRect keyPadFrame=[[UIApplication sharedApplication].keyWindow convertRect:[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue] fromView:self.view];
+        CGSize kbSize =keyPadFrame.size;
+        CGRect activeRectTextField=[self.view convertRect:self.activeTextField.frame fromView:self.activeTextField.superview];
+        CGRect aRect = self.view.bounds;
+        aRect.size.height -= (kbSize.height);
+        CGPoint originTextField =  activeRectTextField.origin;
+        if (!CGRectContainsPoint(aRect, originTextField)) {
+            CGPoint scrollPointTextField = CGPointMake(0.0,CGRectGetMaxY(activeRectTextField)-(aRect.size.height));
+            [self.scrollView setContentOffset:scrollPointTextField animated:YES];
+        }
     }
-    if (CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeTextField.frame)) {
-        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
-    }
+    
+    
+    
+//    CGRect aRect = self.view.frame;
+//    aRect.size.height -= kbSize.height;
+//    
+//    if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
+//        [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+//    }
+//    if (CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeTextField.frame)) {
+//        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
+//    }
 }
 
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
     
-    self.scrollView.contentInset = self.originalContentInsets;
-    self.scrollView.scrollIndicatorInsets = self.originalContentInsets;
+  self.scrollView.contentInset = self.originalContentInsets;
+//    self.scrollView.scrollIndicatorInsets = self.originalContentInsets;
     [self.scrollView scrollRectToVisible:CGRectZero animated:YES];
+
+//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+//    self.scrollView.contentInset = contentInsets;
+//    self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 #pragma  mark - Private

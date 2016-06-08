@@ -248,7 +248,7 @@
 
 - (void) showUrlAlert {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Url invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Url Invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         //

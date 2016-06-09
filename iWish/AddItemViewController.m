@@ -18,8 +18,7 @@
 
 @property (nonatomic) AppDelegate *appDelegate;
 
-@property (nonatomic) UITextView *activeField;
-@property (nonatomic) UITextField *activeTextField;
+@property (nonatomic) UIView *activeView;
 @property (nonatomic) BOOL isValidUrl;
 @property (nonatomic) UIEdgeInsets originalContentInsets;
 @property (nonatomic) BOOL pictureTaken;
@@ -56,7 +55,6 @@
     [self.scrollView addGestureRecognizer:gr];
     
     self.appDelegate = [UIApplication sharedApplication].delegate;
-
 }
 
 - (void) viewDidAppear:(BOOL)animated  {
@@ -70,16 +68,6 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark - TextField Delegate
 
@@ -113,17 +101,13 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     
-    if (textField == self.urlTextField) {
-        self.activeTextField = textField;
-    }
+    self.activeView = textField;
 }
 
 -(BOOL) textFieldShouldEndEditing:(UITextField *)textField {
     
-    if (textField == self.urlTextField) {
-        
-        self.activeTextField = nil;
-    }
+    self.activeView = nil;
+    
     return YES;
 }
 
@@ -131,13 +115,13 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     
-    self.activeField = textView;
+    self.activeView = textView;
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     
-    self.activeField = nil;
-
+    self.activeView = nil;
+    
     [textView resignFirstResponder];
     return YES;
 }
@@ -173,68 +157,70 @@
 
 - (void)keyboardWasShown:(NSNotification*)aNotification {
     
-//    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
 
-//    UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.originalContentInsets.top, self.originalContentInsets.left, self.originalContentInsets.bottom + kbSize.height , self.originalContentInsets.right);
+    [self adjustScrollViewContentInsetSize:kbSize.height];
     
-//    self.scrollView.contentInset = contentInsets;
-//    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-//    NSDictionary* info = [aNotification userInfo];
-//    CGRect keyPadFrame=[[UIApplication sharedApplication].keyWindow convertRect:[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue] fromView:self.view];
-//    CGSize kbSize =keyPadFrame.size;
-    
-    if (self.activeField) {
-        NSDictionary* info = [aNotification userInfo];
-        CGRect keyPadFrame=[[UIApplication sharedApplication].keyWindow convertRect:[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue] fromView:self.view];
-        CGSize kbSize =keyPadFrame.size;
-        CGRect activeRect=[self.view convertRect:self.activeField.frame fromView:self.activeField.superview];
-        CGRect aRect = self.view.bounds;
-        aRect.size.height -= (kbSize.height);
-        CGPoint origin =  activeRect.origin;
-        origin.y -= self.scrollView.contentOffset.y;
-        if (!CGRectContainsPoint(aRect, origin)) {
-            CGPoint scrollPoint = CGPointMake(0.0,CGRectGetMaxY(activeRect)-(aRect.size.height));
-            [self.scrollView setContentOffset:scrollPoint animated:YES];
-        }
-    } else if (self.activeTextField) {
-        NSDictionary* info = [aNotification userInfo];
-        CGRect keyPadFrame=[[UIApplication sharedApplication].keyWindow convertRect:[[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue] fromView:self.view];
-        CGSize kbSize =keyPadFrame.size;
-        CGRect activeRectTextField=[self.view convertRect:self.activeTextField.frame fromView:self.activeTextField.superview];
-        CGRect aRect = self.view.bounds;
-        aRect.size.height -= (kbSize.height);
-        CGPoint originTextField =  activeRectTextField.origin;
-        if (!CGRectContainsPoint(aRect, originTextField)) {
-            CGPoint scrollPointTextField = CGPointMake(0.0,CGRectGetMaxY(activeRectTextField)-(aRect.size.height));
-            [self.scrollView setContentOffset:scrollPointTextField animated:YES];
-        }
-    }
-    
-    
-    
-//    CGRect aRect = self.view.frame;
-//    aRect.size.height -= kbSize.height;
-//    
-//    if ( CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeField.frame) ) {
-//        [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
-//    }
-//    if (CGRectGetMaxY(aRect) < CGRectGetMaxY(self.activeTextField.frame)) {
-//        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
-//    }
+    [self adjustScrollViewContentOffsetIfNeeded:kbSize];
 }
 
-// Called when the UIKeyboardWillHideNotification is sent
+- (void)adjustScrollViewContentInsetSize:(CGFloat)keyboardHeight {
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(self.originalContentInsets.top, self.originalContentInsets.left, self.originalContentInsets.bottom + keyboardHeight , self.originalContentInsets.right);
+    
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)adjustScrollViewContentOffsetIfNeeded:(CGSize)keyboardSize {
+    
+    if ( [self isCurrentActiveFieldObscuredByKeyboard] ) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            CGPoint contentOffset = [self currentActiveFieldContentOffsetForKeyboardHeight:keyboardSize.height];
+            [self.scrollView setContentOffset:contentOffset animated:YES];
+        });
+    }
+}
+
+- (CGPoint)currentActiveFieldContentOffsetForKeyboardHeight:(CGFloat)keyboardHeight {
+    
+    CGFloat keyboardMinY = self.view.bounds.size.height - keyboardHeight;
+    CGFloat contentOffsetY = [self activeTextfieldMaxY] - keyboardMinY;
+    
+    return CGPointMake(0, contentOffsetY);
+}
+
+- (BOOL)isCurrentActiveFieldObscuredByKeyboard {
+    
+    CGFloat activeTextfieldMaxY = [self activeTextfieldMaxY];
+    CGRect currentContentFrame = [self currentContentFrame];
+    
+    return !CGRectContainsPoint(currentContentFrame, CGPointMake(0, activeTextfieldMaxY));
+}
+
+- (CGFloat)activeTextfieldMaxY {
+    
+    CGFloat fieldBottomPadding = 10.0;
+    
+    return CGRectGetMaxY(self.activeView.frame) + fieldBottomPadding;
+}
+
+- (CGRect)currentContentFrame {
+    
+    CGFloat visibleContentHeight = (self.scrollView.contentInset.bottom + self.scrollView.contentInset.top);
+    CGFloat currentContentOffsetAdjustment = (self.originalContentInsets.top + self.scrollView.contentOffset.y);
+    CGFloat visibleHeight = self.view.frame.size.height - visibleContentHeight + currentContentOffsetAdjustment;
+    
+    return CGRectMake(0, 0, self.view.frame.size.width, visibleHeight) ;
+}
+
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification {
     
-  self.scrollView.contentInset = self.originalContentInsets;
-//    self.scrollView.scrollIndicatorInsets = self.originalContentInsets;
-    [self.scrollView scrollRectToVisible:CGRectZero animated:YES];
-
-//    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-//    self.scrollView.contentInset = contentInsets;
-//    self.scrollView.scrollIndicatorInsets = contentInsets;
+    self.scrollView.contentInset = self.originalContentInsets;
+    self.scrollView.scrollIndicatorInsets = self.originalContentInsets;
 }
 
 #pragma  mark - Private
@@ -272,11 +258,9 @@
     self.isValidUrl = NO;
         NSURL* url = [NSURL URLWithString:self.urlTextField.text];
         if (url && url.scheme && url.host) {
-            NSLog(@"YES %@ is a proper URL", self.urlTextField.text);
             self.isValidUrl = YES;
             return YES;
         } else {
-            NSLog(@"Nope %@ is not a proper URL", self.urlTextField.text);
             self.isValidUrl = NO;
             return NO;
         }
@@ -288,7 +272,6 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Url Invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        //
     }];
     
     [alert addAction:ok];
@@ -318,7 +301,6 @@
 - (IBAction)doneButtonPressed:(id)sender {
     
     if (self.urlTextField.text.length >= 1) {
-
         [self isValidUrl];
     }
             

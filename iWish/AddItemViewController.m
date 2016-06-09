@@ -46,7 +46,7 @@
     self.title = @"Add Item";
     
     self.pictureTaken = NO;
-    
+
     [self.doneButton setEnabled:NO];
     
     [self.itemDetailsTextView setDelegate:self];
@@ -133,7 +133,7 @@
     self.pictureTaken = YES;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
     self.itemImageView.image = image;
 }
 
@@ -253,7 +253,7 @@
     }
 }
 
-- (BOOL) isValidUrl {
+- (BOOL)isValidUrl {
     
     self.isValidUrl = NO;
         NSURL* url = [NSURL URLWithString:self.urlTextField.text];
@@ -267,30 +267,62 @@
     return self.isValidUrl;
 }
 
-- (void) showUrlAlert {
+- (void)showUrlAlert {
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Url Invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *urlAlert = [UIAlertController alertControllerWithTitle:@"Url Invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
     
-    [alert addAction:ok];
-    [self presentViewController:alert animated:YES completion:nil];
+    [urlAlert addAction:ok];
+    [self presentViewController:urlAlert animated:YES completion:nil];
 }
 
+- (void)showPictureAlert {
+    
+    UIAlertController *pictureAlert = [UIAlertController alertControllerWithTitle:nil
+                                                                          message:nil
+                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *takePicture = [UIAlertAction actionWithTitle:@"Take Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+    }];
+    
+    UIAlertAction *chooseLibrary = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+        }
+    }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    
+    [pictureAlert addAction:takePicture];
+    [pictureAlert addAction:chooseLibrary];
+    [pictureAlert addAction:cancel];
+
+    [self presentViewController:pictureAlert animated:YES completion:nil];
+}
 
 #pragma mark - Action handlers
 
 - (IBAction)addPictureButtonPressed:(id)sender {
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = NO;
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-        [self presentViewController:picker animated:YES completion:nil];
-    }
+    [self showPictureAlert];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -327,9 +359,6 @@
         [self showUrlAlert];
     }
 }
-
-
-
 
 @end
 

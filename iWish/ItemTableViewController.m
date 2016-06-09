@@ -170,17 +170,16 @@
     
     for (Item *anItem in sortedItems) {
         NSMutableString *emailString = [[NSMutableString alloc] init];
+        
         [emailString appendFormat:@"<ul><li><font color=\"#e74c3c\"><strong>%@ </strong></font>", anItem.name];
-
-        if (![anItem.url isEqualToString:@""]) {
-            [emailString appendFormat:@"<a href=\"%@\">(see product)</a>", anItem.url];
-        }
         if (![anItem.details isEqualToString:@""]) {
             [emailString appendFormat:@"<br> %@", anItem.details];
         }
+        if (![anItem.url isEqualToString:@""]) {
+            [emailString appendFormat:@"<br><a href=\"%@\">buy</a>", anItem.url];
+        }
         [emailString appendString:@"</li></ul>"];
         
-        NSLog(@"%@", emailString);
         [itemsDescription addObject:emailString];
     }
     return itemsDescription;

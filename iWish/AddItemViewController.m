@@ -244,6 +244,26 @@
     [self.scrollView endEditing:YES];
 }
 
+- (void)createGiftItem {
+    
+    Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.appDelegate.managedObjectContext];
+    anItem.name = self.itemNameTextField.text;
+    anItem.details = self.itemDetailsTextView.text;
+    anItem.url = self.urlTextField.text;
+    long x = self.listSelected.items.count;
+    anItem.position = [NSNumber numberWithLong:x];
+    
+    if (self.pictureTaken) {
+        anItem.picture = [self savePictureToDisk];
+    } else {
+        anItem.picture = nil;
+    }
+    
+    [self.listSelected addItemsObject:anItem];
+    
+    [self saveObject];
+}
+
 - (void)saveObject {
     
     NSError *error = nil;
@@ -269,7 +289,7 @@
 
 - (void)showUrlAlert {
     
-    UIAlertController *urlAlert = [UIAlertController alertControllerWithTitle:@"Url Invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *urlAlert = [UIAlertController alertControllerWithTitle:@"Url Invalid" message:@"Please enter a valid url (https://...)" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     }];
@@ -280,35 +300,17 @@
 
 - (void)showPictureAlert {
     
-    UIAlertController *pictureAlert = [UIAlertController alertControllerWithTitle:nil
-                                                                          message:nil
-                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *pictureAlert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *takePicture = [UIAlertAction actionWithTitle:@"Take Picture" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            picker.allowsEditing = YES;
-            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            
-            [self presentViewController:picker animated:YES completion:nil];
-        }
+    UIAlertAction *takePicture = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self displayImagePickerController:UIImagePickerControllerSourceTypeCamera];
     }];
     
     UIAlertAction *chooseLibrary = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-            picker.delegate = self;
-            picker.allowsEditing = YES;
-            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            
-            [self presentViewController:picker animated:YES completion:nil];
-        }
+        [self displayImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary];
     }];
     
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
     }];
     
     [pictureAlert addAction:takePicture];
@@ -318,11 +320,33 @@
     [self presentViewController:pictureAlert animated:YES completion:nil];
 }
 
+- (void)displayImagePickerController:(UIImagePickerControllerSourceType)sourceType {
+    
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = sourceType;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
 #pragma mark - Action handlers
 
 - (IBAction)addPictureButtonPressed:(id)sender {
     
-    [self showPictureAlert];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        
+        [self showPictureAlert];
+        
+    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        
+        [self displayImagePickerController:UIImagePickerControllerSourceTypeCamera];
+        
+    } else if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        
+        [self displayImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -335,26 +359,9 @@
     if (self.urlTextField.text.length >= 1) {
         [self isValidUrl];
     }
-            
     if (self.isValidUrl || self.urlTextField.text.length == 0) {
-        Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.appDelegate.managedObjectContext];
-        anItem.name = self.itemNameTextField.text;
-        anItem.details = self.itemDetailsTextView.text;
-        anItem.url = self.urlTextField.text;
-        long x = self.listSelected.items.count;
-        anItem.position = [NSNumber numberWithLong:x];
-                
-        if (self.pictureTaken) {
-            anItem.picture = [self savePictureToDisk];
-        } else {
-            anItem.picture = nil;
-        }
-        
-        [self.listSelected addItemsObject:anItem];
-    
-        [self saveObject];
+        [self createGiftItem];
         [self dismissViewControllerAnimated:YES completion:nil];
-            
     } else {
         [self showUrlAlert];
     }

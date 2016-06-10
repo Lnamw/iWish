@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>iWishShareExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>AA814AC41D0AB0CE00D9858B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AABDF2AF1D06E2C3002FE238</key>
 		<dict>
 			<key>primary</key>

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA7AC8781D0AF0E6008A87FF /* WishDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7AC8771D0AF0E6008A87FF /* WishDataStore.m */; };
+		AA814ADD1D0ACAE800D9858B /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA814ADC1D0ACAE800D9858B /* ShareViewController.m */; };
+		AA814AE01D0ACAE800D9858B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA814ADE1D0ACAE800D9858B /* MainInterface.storyboard */; };
+		AA814AE41D0ACAE800D9858B /* iWishShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AABDF2B31D06E2C3002FE238 /* iWishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABDF2B21D06E2C3002FE238 /* iWishTests.m */; };
 		AABDF2BB1D06E2FD002FE238 /* ItemTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABDF2BA1D06E2FD002FE238 /* ItemTableViewControllerTests.m */; };
 		AACDCCB31CFDFBBE001CB851 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB21CFDFBBE001CB851 /* main.m */; };
@@ -28,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AA814AE21D0ACAE800D9858B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AACDCCA61CFDFBBE001CB851 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA814AD81D0ACAE700D9858B;
+			remoteInfo = iWishShareExtension;
+		};
 		AABDF2B51D06E2C3002FE238 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AACDCCA61CFDFBBE001CB851 /* Project object */;
@@ -37,7 +48,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AA814AE81D0ACAE800D9858B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				AA814AE41D0ACAE800D9858B /* iWishShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		AA7AC8761D0AF0E6008A87FF /* WishDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDataStore.h; sourceTree = "<group>"; };
+		AA7AC8771D0AF0E6008A87FF /* WishDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDataStore.m; sourceTree = "<group>"; };
+		AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = iWishShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA814ADB1D0ACAE800D9858B /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		AA814ADC1D0ACAE800D9858B /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		AA814ADF1D0ACAE800D9858B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		AA814AE11D0ACAE800D9858B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AABDF2B01D06E2C3002FE238 /* iWishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABDF2B21D06E2C3002FE238 /* iWishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iWishTests.m; sourceTree = "<group>"; };
 		AABDF2B41D06E2C3002FE238 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +106,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AA814AD61D0ACAE700D9858B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AABDF2AD1D06E2C3002FE238 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -91,6 +130,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA814ADA1D0ACAE800D9858B /* iWishShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				AA814ADB1D0ACAE800D9858B /* ShareViewController.h */,
+				AA814ADC1D0ACAE800D9858B /* ShareViewController.m */,
+				AA814ADE1D0ACAE800D9858B /* MainInterface.storyboard */,
+				AA814AE11D0ACAE800D9858B /* Info.plist */,
+			);
+			path = iWishShareExtension;
+			sourceTree = "<group>";
+		};
 		AABDF2B11D06E2C3002FE238 /* iWishTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +155,7 @@
 			children = (
 				AACDCCB01CFDFBBE001CB851 /* iWish */,
 				AABDF2B11D06E2C3002FE238 /* iWishTests */,
+				AA814ADA1D0ACAE800D9858B /* iWishShareExtension */,
 				AACDCCAF1CFDFBBE001CB851 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +165,7 @@
 			children = (
 				AACDCCAE1CFDFBBE001CB851 /* iWish.app */,
 				AABDF2B01D06E2C3002FE238 /* iWishTests.xctest */,
+				AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +183,8 @@
 				AACDCCC21CFDFBBE001CB851 /* LaunchScreen.storyboard */,
 				AACDCCC51CFDFBBE001CB851 /* Info.plist */,
 				AACDCCB11CFDFBBE001CB851 /* Supporting Files */,
+				AA7AC8761D0AF0E6008A87FF /* WishDataStore.h */,
+				AA7AC8771D0AF0E6008A87FF /* WishDataStore.m */,
 			);
 			path = iWish;
 			sourceTree = "<group>";
@@ -214,6 +268,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AA814AD81D0ACAE700D9858B /* iWishShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA814AE71D0ACAE800D9858B /* Build configuration list for PBXNativeTarget "iWishShareExtension" */;
+			buildPhases = (
+				AA814AD51D0ACAE700D9858B /* Sources */,
+				AA814AD61D0ACAE700D9858B /* Frameworks */,
+				AA814AD71D0ACAE700D9858B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iWishShareExtension;
+			productName = iWishShareExtension;
+			productReference = AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		AABDF2AF1D06E2C3002FE238 /* iWishTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AABDF2B91D06E2C3002FE238 /* Build configuration list for PBXNativeTarget "iWishTests" */;
@@ -239,10 +310,12 @@
 				AACDCCAA1CFDFBBE001CB851 /* Sources */,
 				AACDCCAB1CFDFBBE001CB851 /* Frameworks */,
 				AACDCCAC1CFDFBBE001CB851 /* Resources */,
+				AA814AE81D0ACAE800D9858B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AA814AE31D0ACAE800D9858B /* PBXTargetDependency */,
 			);
 			name = iWish;
 			productName = iWish;
@@ -258,6 +331,10 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Elena;
 				TargetAttributes = {
+					AA814AD81D0ACAE700D9858B = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = D6JSDY96LP;
+					};
 					AABDF2AF1D06E2C3002FE238 = {
 						CreatedOnToolsVersion = 7.3.1;
 						TestTargetID = AACDCCAD1CFDFBBE001CB851;
@@ -283,11 +360,20 @@
 			targets = (
 				AACDCCAD1CFDFBBE001CB851 /* iWish */,
 				AABDF2AF1D06E2C3002FE238 /* iWishTests */,
+				AA814AD81D0ACAE700D9858B /* iWishShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AA814AD71D0ACAE700D9858B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA814AE01D0ACAE800D9858B /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AABDF2AE1D06E2C3002FE238 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -308,6 +394,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AA814AD51D0ACAE700D9858B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA814ADD1D0ACAE800D9858B /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AABDF2AC1D06E2C3002FE238 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -329,6 +423,7 @@
 				AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */,
 				AAE763D51D0063A100051FC2 /* ItemCell.m in Sources */,
 				AACDCCBF1CFDFBBE001CB851 /* iWish.xcdatamodeld in Sources */,
+				AA7AC8781D0AF0E6008A87FF /* WishDataStore.m in Sources */,
 				AACDCCD41CFDFE11001CB851 /* List.m in Sources */,
 				AACDCCD31CFDFE11001CB851 /* List+CoreDataProperties.m in Sources */,
 				AACDCCB31CFDFBBE001CB851 /* main.m in Sources */,
@@ -340,6 +435,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AA814AE31D0ACAE800D9858B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA814AD81D0ACAE700D9858B /* iWishShareExtension */;
+			targetProxy = AA814AE21D0ACAE800D9858B /* PBXContainerItemProxy */;
+		};
 		AABDF2B61D06E2C3002FE238 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AACDCCAD1CFDFBBE001CB851 /* iWish */;
@@ -348,6 +448,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AA814ADE1D0ACAE800D9858B /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA814ADF1D0ACAE800D9858B /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -367,6 +475,32 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AA814AE51D0ACAE800D9858B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = iWishShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWish.iWishShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AA814AE61D0ACAE800D9858B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = iWishShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWish.iWishShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		AABDF2B71D06E2C3002FE238 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -506,6 +640,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA814AE71D0ACAE800D9858B /* Build configuration list for PBXNativeTarget "iWishShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA814AE51D0ACAE800D9858B /* Debug */,
+				AA814AE61D0ACAE800D9858B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AABDF2B91D06E2C3002FE238 /* Build configuration list for PBXNativeTarget "iWishTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

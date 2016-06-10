@@ -10,4 +10,7 @@
 
 @interface ListTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSMutableArray *lists;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 @end

@@ -9,17 +9,11 @@
 #import "ListTableViewController.h"
 #import "ListCell.h"
 #import "ItemTableViewController.h"
-
-#import <CoreData/CoreData.h>
-#import "AppDelegate.h"
-
 #import "List.h"
+#import "WishDataStore.h"
 
 @interface ListTableViewController ()
-
-@property (nonatomic, strong) NSMutableArray *lists;
-@property (nonatomic) AppDelegate *appDelegate;
-
+@property (nonatomic, strong) WishDataStore *dataStore;
 @end
 
 @implementation ListTableViewController
@@ -28,33 +22,23 @@
     [super viewDidLoad];
     
     self.title = @"My Lists";
-
+    self.dataStore = [WishDataStore new];
+    self.dataStore.managedObjectContext = self.managedObjectContext;
     self.lists = [NSMutableArray array];
     
-    self.appDelegate = [UIApplication sharedApplication].delegate;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"List" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [request setEntity:entity];
-    NSError *error = nil;
-    NSArray *fetchResults = [self.appDelegate.managedObjectContext executeFetchRequest:request error:&error];
-    if (error) {
-        // Fetch request encountered error
-        NSLog(@"Fetch request failed: %@", [error localizedDescription]);
-    } else {
-        for (List *aList in fetchResults) {
-            NSPredicate *listSearch = [NSPredicate predicateWithFormat:@"name=%@", aList.name];
-            NSArray *foundLists = [self.lists filteredArrayUsingPredicate:listSearch];
-            if (foundLists.count == 0) {
-                [self.lists addObject:aList];
-            }
-        }
-        [self.tableView reloadData];
-    }
+    self.lists = [NSMutableArray arrayWithArray:[self.dataStore fetchLists]];
+    
+}
+
+- (void)setLists:(NSMutableArray *)lists {
+    _lists = lists;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -89,7 +73,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         List *aList = self.lists[indexPath.row];
-        [self.appDelegate.managedObjectContext deleteObject:aList];
+        [self.managedObjectContext deleteObject:aList];
         [self saveObject];
         [self.lists removeObjectAtIndex:indexPath.row];
         
@@ -116,7 +100,7 @@
 - (void)saveObject {
     
     NSError *error = nil;
-    [self.appDelegate.managedObjectContext save:&error];
+    [self.managedObjectContext save:&error];
     if (error) {
         NSLog(@"Core Data could not save: %@", [error localizedDescription]);
     }

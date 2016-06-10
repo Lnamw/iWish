@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ListTableViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    UINavigationController *rootViewController = (id) self.window.rootViewController;
+    ListTableViewController *controller = (id) rootViewController.topViewController;
+    controller.managedObjectContext = [self managedObjectContext];
+    
     return YES;
 }
 

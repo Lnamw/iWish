@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class WishDataStore;
+
 @interface ListTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *lists;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) WishDataStore *dataStore;
 
 @end

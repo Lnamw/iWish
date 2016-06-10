@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class List;
+
 @interface WishDataStore : NSObject
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 - (NSArray*)fetchLists;
-    
+
+- (void)deleteList:(List*)list;
 @end

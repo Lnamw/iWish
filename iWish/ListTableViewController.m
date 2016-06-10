@@ -12,18 +12,11 @@
 #import "List.h"
 #import "WishDataStore.h"
 
-@interface ListTableViewController ()
-@property (nonatomic, strong) WishDataStore *dataStore;
-@end
-
 @implementation ListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"My Lists";
-    self.dataStore = [WishDataStore new];
-    self.dataStore.managedObjectContext = self.managedObjectContext;
     self.lists = [NSMutableArray array];
     
 }
@@ -73,8 +66,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         List *aList = self.lists[indexPath.row];
-        [self.managedObjectContext deleteObject:aList];
-        [self saveObject];
+        
+        [self.dataStore deleteList:aList];
+        
         [self.lists removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -92,17 +86,6 @@
         List *selectedList = self.lists[cellIndexPath.row];
         
         itemTVC.selectedList = selectedList;
-    }
-}
-
-#pragma mark - Private 
-
-- (void)saveObject {
-    
-    NSError *error = nil;
-    [self.managedObjectContext save:&error];
-    if (error) {
-        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
     }
 }
 

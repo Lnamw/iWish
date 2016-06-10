@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		AA7AC8781D0AF0E6008A87FF /* WishDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7AC8771D0AF0E6008A87FF /* WishDataStore.m */; };
+		AA7AC8791D0AFC28008A87FF /* ListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763941CFE01D200051FC2 /* ListTableViewController.m */; };
+		AA7AC87A1D0AFD7E008A87FF /* WishDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = AA7AC8771D0AF0E6008A87FF /* WishDataStore.m */; };
+		AA7AC87B1D0AFE24008A87FF /* iWish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCBD1CFDFBBE001CB851 /* iWish.xcdatamodeld */; };
+		AA7AC87E1D0B0BAA008A87FF /* List.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCCE1CFDFE11001CB851 /* List.m */; };
+		AA7AC87F1D0B0BAE008A87FF /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD21CFDFE11001CB851 /* Item.m */; };
+		AA7AC8801D0B0BB3008A87FF /* List+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCCC1CFDFE11001CB851 /* List+CoreDataProperties.m */; };
+		AA7AC8811D0B0BB3008A87FF /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCD01CFDFE11001CB851 /* Item+CoreDataProperties.m */; };
+		AA7AC8821D0B0BFE008A87FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACDCCBA1CFDFBBE001CB851 /* Main.storyboard */; };
+		AA7AC8831D0B0C89008A87FF /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE763C21CFEDB3700051FC2 /* ListCell.m */; };
 		AA814ADD1D0ACAE800D9858B /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA814ADC1D0ACAE800D9858B /* ShareViewController.m */; };
 		AA814AE01D0ACAE800D9858B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA814ADE1D0ACAE800D9858B /* MainInterface.storyboard */; };
 		AA814AE41D0ACAE800D9858B /* iWishShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -65,6 +74,8 @@
 /* Begin PBXFileReference section */
 		AA7AC8761D0AF0E6008A87FF /* WishDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishDataStore.h; sourceTree = "<group>"; };
 		AA7AC8771D0AF0E6008A87FF /* WishDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishDataStore.m; sourceTree = "<group>"; };
+		AA7AC87C1D0B0084008A87FF /* iWish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iWish.entitlements; sourceTree = "<group>"; };
+		AA7AC87D1D0B008C008A87FF /* iWishShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iWishShareExtension.entitlements; sourceTree = "<group>"; };
 		AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = iWishShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA814ADB1D0ACAE800D9858B /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		AA814ADC1D0ACAE800D9858B /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
@@ -133,6 +144,7 @@
 		AA814ADA1D0ACAE800D9858B /* iWishShareExtension */ = {
 			isa = PBXGroup;
 			children = (
+				AA7AC87D1D0B008C008A87FF /* iWishShareExtension.entitlements */,
 				AA814ADB1D0ACAE800D9858B /* ShareViewController.h */,
 				AA814ADC1D0ACAE800D9858B /* ShareViewController.m */,
 				AA814ADE1D0ACAE800D9858B /* MainInterface.storyboard */,
@@ -173,6 +185,7 @@
 		AACDCCB01CFDFBBE001CB851 /* iWish */ = {
 			isa = PBXGroup;
 			children = (
+				AA7AC87C1D0B0084008A87FF /* iWish.entitlements */,
 				AACDCCD71CFDFE2B001CB851 /* CoreData Models */,
 				AAE763C01CFEDB0900051FC2 /* Custom Cells */,
 				AAE763921CFE01A100051FC2 /* View Controllers */,
@@ -333,7 +346,12 @@
 				TargetAttributes = {
 					AA814AD81D0ACAE700D9858B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = D6JSDY96LP;
+						DevelopmentTeam = SD5J73KKLD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					AABDF2AF1D06E2C3002FE238 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -341,7 +359,12 @@
 					};
 					AACDCCAD1CFDFBBE001CB851 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = D6JSDY96LP;
+						DevelopmentTeam = SD5J73KKLD;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -371,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA814AE01D0ACAE800D9858B /* MainInterface.storyboard in Resources */,
+				AA7AC8821D0B0BFE008A87FF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +422,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA7AC87F1D0B0BAE008A87FF /* Item.m in Sources */,
+				AA7AC87E1D0B0BAA008A87FF /* List.m in Sources */,
 				AA814ADD1D0ACAE800D9858B /* ShareViewController.m in Sources */,
+				AA7AC87A1D0AFD7E008A87FF /* WishDataStore.m in Sources */,
+				AA7AC87B1D0AFE24008A87FF /* iWish.xcdatamodeld in Sources */,
+				AA7AC8791D0AFC28008A87FF /* ListTableViewController.m in Sources */,
+				AA7AC8811D0B0BB3008A87FF /* Item+CoreDataProperties.m in Sources */,
+				AA7AC8831D0B0C89008A87FF /* ListCell.m in Sources */,
+				AA7AC8801D0B0BB3008A87FF /* List+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,11 +510,12 @@
 		AA814AE51D0ACAE800D9858B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iWishShareExtension/iWishShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iWishShareExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWish.iWishShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lna.iwish.iWishShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -491,11 +524,12 @@
 		AA814AE61D0ACAE800D9858B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iWishShareExtension/iWishShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iWishShareExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWish.iWishShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lna.iwish.iWishShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -613,11 +647,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iWish/iWish.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iWish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWish;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lna.iwish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -627,11 +662,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iWish/iWish.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = iWish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Elena.iWish;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lna.iwish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

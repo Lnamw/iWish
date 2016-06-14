@@ -57,12 +57,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		AA814AD41D0AB0CE00D9858B /* Embed App Extensions */ = {
+		AA814AE81D0ACAE800D9858B /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				AA814AE41D0ACAE800D9858B /* iWishShareExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,7 +326,7 @@
 				AACDCCAA1CFDFBBE001CB851 /* Sources */,
 				AACDCCAB1CFDFBBE001CB851 /* Frameworks */,
 				AACDCCAC1CFDFBBE001CB851 /* Resources */,
-				AA814AD41D0AB0CE00D9858B /* Embed App Extensions */,
+				AA814AE81D0ACAE800D9858B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);

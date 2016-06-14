@@ -241,35 +241,6 @@
     [self.scrollView endEditing:YES];
 }
 
-- (void)createGiftItem {
-    
-    Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    anItem.name = self.itemNameTextField.text;
-    anItem.details = self.itemDetailsTextView.text;
-    anItem.url = self.urlTextField.text;
-    long x = self.listSelected.items.count;
-    anItem.position = [NSNumber numberWithLong:x];
-    
-    if (self.pictureTaken) {
-        anItem.picture = [self savePictureToDisk];
-    } else {
-        anItem.picture = nil;
-    }
-    
-    [self.listSelected addItemsObject:anItem];
-    
-    [self saveObject];
-}
-
-- (void)saveObject {
-    
-    NSError *error = nil;
-    [self.appDelegate.managedObjectContext save:&error];
-    if (error) {
-        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
-    }
-}
-
 - (BOOL)isValidUrl {
     
     self.isValidUrl = NO;
@@ -357,7 +328,18 @@
         [self isValidUrl];
     }
     if (self.isValidUrl || self.urlTextField.text.length == 0) {
-        [self createGiftItem];
+        
+        NSString *picture;
+        if (self.pictureTaken) {
+            picture = [self.dataStore savePictureToDiskWithImage:self.itemImageView.image];
+        } else {
+            picture = nil;
+        }
+        long x = self.listSelected.items.count;
+        NSNumber *position = [NSNumber numberWithLong:x];
+        
+        [self.dataStore addGiftItemWithName:self.itemNameTextField.text andUrl:self.urlTextField.text andPicture:picture andDetails:self.itemDetailsTextView.text andPosition:position andList:self.listSelected];
+
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self showUrlAlert];

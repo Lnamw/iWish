@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class List;
+@class WishDataStore;
 
 @interface ItemTableViewController : UITableViewController
 
 @property (nonatomic, strong) List *selectedList;
+@property (nonatomic, strong) WishDataStore *dataStore;
+
 
 - (NSArray *)sortItemsArray;
 

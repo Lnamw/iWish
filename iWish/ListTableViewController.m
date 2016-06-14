@@ -9,52 +9,64 @@
 #import "ListTableViewController.h"
 #import "ListCell.h"
 #import "ItemTableViewController.h"
-
-#import <CoreData/CoreData.h>
-#import "AppDelegate.h"
-
 #import "List.h"
+#import "WishDataStore.h"
+
 
 @interface ListTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *lists;
-@property (nonatomic) AppDelegate *appDelegate;
+@property (nonatomic, strong) ItemTableViewController *itemTVC;
+@property (nonatomic, strong) List *lastSelectedList;
+@property (nonatomic, strong) NSIndexPath *cellIndexPath;
 
 @end
 
 @implementation ListTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
+    [super viewDidLoad];
     self.title = @"My Lists";
-
     self.lists = [NSMutableArray array];
     
-    self.appDelegate = [UIApplication sharedApplication].delegate;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadDataAfterChangeNotification:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"List" inManagedObjectContext:self.appDelegate.managedObjectContext];
-    [request setEntity:entity];
-    NSError *error = nil;
-    NSArray *fetchResults = [self.appDelegate.managedObjectContext executeFetchRequest:request error:&error];
-    if (error) {
-        // Fetch request encountered error
-        NSLog(@"Fetch request failed: %@", [error localizedDescription]);
-    } else {
-        for (List *aList in fetchResults) {
-            NSPredicate *listSearch = [NSPredicate predicateWithFormat:@"name=%@", aList.name];
-            NSArray *foundLists = [self.lists filteredArrayUsingPredicate:listSearch];
-            if (foundLists.count == 0) {
-                [self.lists addObject:aList];
-            }
-        }
-        [self.tableView reloadData];
+    [super viewWillAppear:animated];
+    [self loadData];
+        
+}
+
+- (void)loadDataAfterChangeNotification:(NSNotification*)notification {
+    
+    
+    NSArray *invalidatedObjects = [[notification userInfo] objectForKey:NSInvalidatedAllObjectsKey];
+    
+    if (invalidatedObjects.count) {
+        
+        [self loadData];
+
     }
+
+}
+
+- (void)loadData {
+    
+    self.lists = [NSMutableArray arrayWithArray:[self.dataStore fetchLists]];
+    
+    [self.tableView reloadData];
+    
+    [self passLastSelectedListWithIndexPath:self.cellIndexPath];
+    
+    [self.itemTVC.tableView reloadData];
+    
 }
 
 #pragma mark - Table view data source
@@ -89,8 +101,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         List *aList = self.lists[indexPath.row];
-        [self.appDelegate.managedObjectContext deleteObject:aList];
-        [self saveObject];
+        
+        [self.dataStore deleteList:aList];
+        
         [self.lists removeObjectAtIndex:indexPath.row];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -102,24 +115,26 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if ([segue.identifier isEqualToString:@"showItemTVCSegue"]) {
-        ItemTableViewController *itemTVC = (ItemTableViewController *)[segue destinationViewController];
         
-        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:sender];
-        List *selectedList = self.lists[cellIndexPath.row];
+        self.itemTVC = (ItemTableViewController *)[segue destinationViewController];
         
-        itemTVC.selectedList = selectedList;
+        self.cellIndexPath = [self.tableView indexPathForCell:sender];
+
+        
+        [self passLastSelectedListWithIndexPath:self.cellIndexPath];
+
+        self.itemTVC.dataStore = self.dataStore;
     }
 }
 
-#pragma mark - Private 
+#pragma mark - Private
 
-- (void)saveObject {
+- (void)passLastSelectedListWithIndexPath:(NSIndexPath *)cellIndexPath {
+
+    self.lastSelectedList = self.lists[cellIndexPath.row];
     
-    NSError *error = nil;
-    [self.appDelegate.managedObjectContext save:&error];
-    if (error) {
-        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
-    }
+    self.itemTVC.selectedList = self.lastSelectedList;
+    
 }
 
 

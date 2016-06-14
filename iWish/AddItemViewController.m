@@ -8,15 +8,14 @@
 
 #import "AddItemViewController.h"
 
-#import <CoreData/CoreData.h>
-#import "AppDelegate.h"
+//#import <CoreData/CoreData.h>
+//#import "AppDelegate.h"
+#import "WishDataStore.h"
 
 #import "Item.h"
 #import "List.h"
 
 @interface AddItemViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
-@property (nonatomic) AppDelegate *appDelegate;
 
 @property (nonatomic) UIView *activeView;
 @property (nonatomic) BOOL isValidUrl;
@@ -53,8 +52,6 @@
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
     [self.scrollView addGestureRecognizer:gr];
-    
-    self.appDelegate = [UIApplication sharedApplication].delegate;
 }
 
 - (void) viewDidAppear:(BOOL)animated  {
@@ -225,19 +222,19 @@
 
 #pragma  mark - Private
 
-- (NSString *)savePictureToDisk {
-    
-     if (self.itemImageView.image) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSUUID *uuid = [NSUUID UUID];
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
-        
-        [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
-        
-        return filePath;
-    }
-    return nil;
-}
+//- (NSString *)savePictureToDisk {
+//    
+//     if (self.itemImageView.image) {
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSUUID *uuid = [NSUUID UUID];
+//        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
+//        
+//        [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
+//        
+//        return filePath;
+//    }
+//    return nil;
+//}
 
 - (void)grTapped:(id)sender {
     
@@ -366,6 +363,9 @@
         [self showUrlAlert];
     }
 }
+
+
+
 
 @end
 

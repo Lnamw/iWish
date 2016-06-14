@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class List;
+@class WishDataStore;
 
 @interface AddItemViewController : UIViewController
 
 @property (nonatomic, strong) List *listSelected;
+@property (nonatomic, strong) WishDataStore *dataStore;
+
 
 @end

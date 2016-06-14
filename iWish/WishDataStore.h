@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <UIKit/UIKit.h>
 
 @class List;
 
@@ -18,4 +19,9 @@
 - (NSArray*)fetchLists;
 
 - (void)deleteList:(List*)list;
+
+- (void)addGiftItemWithName:(NSString *)name andUrl:(NSString *)url andPicture:(NSString *)picture andDetails:(NSString *)details andPosition:(NSNumber *)position andList:(List *)list;
+
+- (NSString *)savePictureToDiskWithImage:(UIImage *)image;
+
 @end

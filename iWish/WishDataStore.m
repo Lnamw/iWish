@@ -8,6 +8,7 @@
 
 #import "WishDataStore.h"
 #import "List.h"
+#import "Item.h"
 
 @interface WishDataStore ()
 
@@ -41,6 +42,34 @@
 - (void)deleteList:(List *)list {
     [self.managedObjectContext deleteObject:list];
     [self save];
+}
+
+- (void)addGiftItemWithName:(NSString *)name andUrl:(NSString *)url andPicture:(NSString *)picture andDetails:(NSString *)details andPosition:(NSNumber *)position andList:(List *)list {
+    
+    Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.managedObjectContext];
+    anItem.name = name;
+    anItem.details = details;
+    anItem.url = url;
+    anItem.position = position;
+    anItem.picture = picture;
+    
+    [list addItemsObject:anItem];
+    
+    [self save];
+}
+
+- (NSString *)savePictureToDiskWithImage:(UIImage *)image {
+    
+    if (image) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSUUID *uuid = [NSUUID UUID];
+        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
+        
+        [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+        
+        return filePath;
+    }
+    return nil;
 }
 
 #pragma mark - Private 
@@ -90,7 +119,7 @@
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"iWish.sqlite"];
-    NSLog(@"%@",storeURL);
+//    NSLog(@"%@",storeURL);
     
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";

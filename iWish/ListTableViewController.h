@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @class WishDataStore;
+@class List;
+
 
 @interface ListTableViewController : UITableViewController
 

@@ -8,15 +8,14 @@
 
 #import "AddItemViewController.h"
 
-#import <CoreData/CoreData.h>
-#import "AppDelegate.h"
+//#import <CoreData/CoreData.h>
+//#import "AppDelegate.h"
+#import "WishDataStore.h"
 
 #import "Item.h"
 #import "List.h"
 
 @interface AddItemViewController () <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
-@property (nonatomic) AppDelegate *appDelegate;
 
 @property (nonatomic) UIView *activeView;
 @property (nonatomic) BOOL isValidUrl;
@@ -53,8 +52,6 @@
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
     [self.scrollView addGestureRecognizer:gr];
-    
-    self.appDelegate = [UIApplication sharedApplication].delegate;
 }
 
 - (void) viewDidAppear:(BOOL)animated  {
@@ -225,32 +222,23 @@
 
 #pragma  mark - Private
 
-- (NSString *)savePictureToDisk {
-    
-     if (self.itemImageView.image) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSUUID *uuid = [NSUUID UUID];
-        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
-        
-        [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
-        
-        return filePath;
-    }
-    return nil;
-}
+//- (NSString *)savePictureToDisk {
+//    
+//     if (self.itemImageView.image) {
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSUUID *uuid = [NSUUID UUID];
+//        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
+//        
+//        [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
+//        
+//        return filePath;
+//    }
+//    return nil;
+//}
 
 - (void)grTapped:(id)sender {
     
     [self.scrollView endEditing:YES];
-}
-
-- (void)saveObject {
-    
-    NSError *error = nil;
-    [self.appDelegate.managedObjectContext save:&error];
-    if (error) {
-        NSLog(@"Core Data could not save: %@", [error localizedDescription]);
-    }
 }
 
 - (BOOL)isValidUrl {
@@ -337,28 +325,27 @@
     }
             
     if (self.isValidUrl || self.urlTextField.text.length == 0) {
-        Item *anItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.appDelegate.managedObjectContext];
-        anItem.name = self.itemNameTextField.text;
-        anItem.details = self.itemDetailsTextView.text;
-        anItem.url = self.urlTextField.text;
-        long x = self.listSelected.items.count;
-        anItem.position = [NSNumber numberWithLong:x];
-                
-        if (self.pictureTaken) {
-            anItem.picture = [self savePictureToDisk];
-        } else {
-            anItem.picture = nil;
-        }
         
-        [self.listSelected addItemsObject:anItem];
-    
-        [self saveObject];
+        NSString *picture;
+        if (self.pictureTaken) {
+            picture = [self.dataStore savePictureToDiskWithImage:self.itemImageView.image];
+        } else {
+            picture = nil;
+        }
+        long x = self.listSelected.items.count;
+        NSNumber *position = [NSNumber numberWithLong:x];
+        
+        [self.dataStore addGiftItemWithName:self.itemNameTextField.text andUrl:self.urlTextField.text andPicture:picture andDetails:self.itemDetailsTextView.text andPosition:position andList:self.listSelected];
+
         [self dismissViewControllerAnimated:YES completion:nil];
             
     } else {
         [self showUrlAlert];
     }
 }
+
+
+
 
 @end
 

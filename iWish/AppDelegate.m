@@ -29,6 +29,11 @@
     return YES;
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+    [self.managedObjectContext reset];
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     [self saveContext];
 }

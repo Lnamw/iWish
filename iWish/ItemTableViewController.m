@@ -12,6 +12,7 @@
 
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
+//#import "WishDataStore.h"
 
 #import <MessageUI/MFMailComposeViewController.h>
 
@@ -101,6 +102,7 @@
         AddItemViewController *addItemVC = (AddItemViewController *)([navController viewControllers][0]);
     
         addItemVC.listSelected = self.selectedList;
+        addItemVC.dataStore = self.dataStore;
     }
 }
 

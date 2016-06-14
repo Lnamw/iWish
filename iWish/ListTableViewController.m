@@ -12,26 +12,61 @@
 #import "List.h"
 #import "WishDataStore.h"
 
+
+@interface ListTableViewController ()
+
+@property (nonatomic, strong) ItemTableViewController *itemTVC;
+@property (nonatomic, strong) List *lastSelectedList;
+@property (nonatomic, strong) NSIndexPath *cellIndexPath;
+
+@end
+
 @implementation ListTableViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     self.title = @"My Lists";
     self.lists = [NSMutableArray array];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadDataAfterChangeNotification:) name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    [self loadData];
+        
+}
+
+- (void)loadDataAfterChangeNotification:(NSNotification*)notification {
+    
+    
+    NSArray *invalidatedObjects = [[notification userInfo] objectForKey:NSInvalidatedAllObjectsKey];
+    
+    if (invalidatedObjects.count) {
+        
+        [self loadData];
+
+    }
+
+}
+
+- (void)loadData {
     
     self.lists = [NSMutableArray arrayWithArray:[self.dataStore fetchLists]];
     
-}
-
-- (void)setLists:(NSMutableArray *)lists {
-    _lists = lists;
     [self.tableView reloadData];
+    
+    [self passLastSelectedListWithIndexPath:self.cellIndexPath];
+    
+    [self.itemTVC.tableView reloadData];
+    
 }
 
 #pragma mark - Table view data source
@@ -80,13 +115,26 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if ([segue.identifier isEqualToString:@"showItemTVCSegue"]) {
-        ItemTableViewController *itemTVC = (ItemTableViewController *)[segue destinationViewController];
         
-        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:sender];
-        List *selectedList = self.lists[cellIndexPath.row];
+        self.itemTVC = (ItemTableViewController *)[segue destinationViewController];
         
-        itemTVC.selectedList = selectedList;
+        self.cellIndexPath = [self.tableView indexPathForCell:sender];
+
+        
+        [self passLastSelectedListWithIndexPath:self.cellIndexPath];
+
+        self.itemTVC.dataStore = self.dataStore;
     }
+}
+
+#pragma mark - Private
+
+- (void)passLastSelectedListWithIndexPath:(NSIndexPath *)cellIndexPath {
+
+    self.lastSelectedList = self.lists[cellIndexPath.row];
+    
+    self.itemTVC.selectedList = self.lastSelectedList;
+    
 }
 
 

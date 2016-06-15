@@ -50,12 +50,25 @@
     anItem.name = name;
     anItem.details = details;
     anItem.url = url;
-    anItem.position = position;
     anItem.picture = picture;
+    
+    anItem.position = position;
+
     
     [list addItemsObject:anItem];
     
     [self save];
+}
+
+- (void)editItemWithItem:(Item *)item name:(NSString *)name url:(NSString *)url picture:(NSString *)picture details:(NSString *)details {
+    
+    item.name = name;
+    item.details = details;
+    item.url = url;
+    item.picture = picture;
+    
+    [self save];
+
 }
 
 - (NSString *)savePictureToDiskWithImage:(UIImage *)image {

@@ -7,6 +7,7 @@
 //
 
 #import "ItemDetailViewController.h"
+#import "AddItemViewController.h"
 
 #import "Item.h"
 
@@ -26,6 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
     self.NameDetailLabel.text = self.selectedItem.name;
     self.detailLabel.text = self.selectedItem.details;
     self.detailImageView.image = [self displayImage:self.selectedItem];
@@ -35,23 +41,23 @@
     } else {
         [self.urlButton setHidden:NO];
     }
-
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    if ([segue.identifier isEqualToString:@"EditItemSegue"]) {
+        
+        UINavigationController *navController = [segue destinationViewController];
+        AddItemViewController *addItemVC = (AddItemViewController *)([navController viewControllers][0]);
+        
+        addItemVC.itemSelected = self.selectedItem;
+        addItemVC.dataStore = self.dataStore;
+    }
+    
 }
-*/
+
 
 #pragma mark - Private 
 

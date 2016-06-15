@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @class List;
+@class Item;
 
 @interface WishDataStore : NSObject
 
@@ -21,6 +22,8 @@
 - (void)deleteList:(List*)list;
 
 - (void)addGiftItemWithName:(NSString *)name andUrl:(NSString *)url andPicture:(NSString *)picture andDetails:(NSString *)details andPosition:(NSNumber *)position andList:(List *)list;
+
+- (void)editItemWithItem:(Item *)item name:(NSString *)name url:(NSString *)url picture:(NSString *)picture details:(NSString *)details;
 
 - (NSString *)savePictureToDiskWithImage:(UIImage *)image;
 

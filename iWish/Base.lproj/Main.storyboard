@@ -400,13 +400,6 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OUE-Xc-O4O">
-                                <rect key="frame" x="225" y="157.5" width="150" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="S3J-7K-Sev"/>
-                                    <constraint firstAttribute="width" constant="150" id="cMd-9k-Zzn"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDG-96-x5h">
                                 <rect key="frame" x="20" y="347.5" width="564" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
@@ -420,6 +413,13 @@
                                     <action selector="buyButtonPressed:" destination="f2n-DU-JF6" eventType="touchUpInside" id="XZp-qI-wgW"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OUE-Xc-O4O">
+                                <rect key="frame" x="225" y="158" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="S3J-7K-Sev"/>
+                                    <constraint firstAttribute="width" constant="150" id="cMd-9k-Zzn"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -438,7 +438,7 @@
                     <navigationItem key="navigationItem" id="0gy-Uv-5q2">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="s1d-QN-get">
                             <connections>
-                                <segue destination="jU3-Ba-a8d" kind="presentation" id="wJc-uR-NHL"/>
+                                <segue destination="jU3-Ba-a8d" kind="presentation" identifier="EditItemSegue" id="wJc-uR-NHL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

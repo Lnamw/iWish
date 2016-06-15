@@ -42,8 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Add Item";
-    
     self.pictureTaken = NO;
 
     [self.doneButton setEnabled:NO];
@@ -52,6 +50,27 @@
     
     UITapGestureRecognizer *gr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(grTapped:)];
     [self.scrollView addGestureRecognizer:gr];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    if (self.itemSelected) {
+        
+        self.title = @"Edit Item";
+
+        self.itemNameTextField.text = self.itemSelected.name;
+        self.itemDetailsTextView.text = self.itemSelected.details;
+        self.urlTextField.text = self.itemSelected.url;
+        
+        if (!self.pictureTaken) {
+            self.itemImageView.image = [self displayImage:self.itemSelected];
+        }
+        
+        [self.doneButton setEnabled:YES];
+    } else {
+        self.title = @"Add Item";
+    }
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated  {
@@ -222,20 +241,6 @@
 
 #pragma  mark - Private
 
-//- (NSString *)savePictureToDisk {
-//    
-//     if (self.itemImageView.image) {
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSUUID *uuid = [NSUUID UUID];
-//        NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
-//        
-//        [UIImagePNGRepresentation(self.itemImageView.image) writeToFile:filePath atomically:YES];
-//        
-//        return filePath;
-//    }
-//    return nil;
-//}
-
 - (void)grTapped:(id)sender {
     
     [self.scrollView endEditing:YES];
@@ -298,6 +303,23 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+- (UIImage *)displayImage:(Item *)anItem {
+    
+    NSString *pathToImage = anItem.picture;
+    NSData *imageData = [NSData dataWithContentsOfFile:pathToImage];
+    UIImage *imageWithData = [UIImage imageWithData:imageData];
+    
+    if (imageWithData) {
+        UIImage *imageToDisplay =[UIImage imageWithCGImage:[imageWithData CGImage]];
+        
+        return imageToDisplay;
+    } else {
+        UIImage *giftBoxImage = [UIImage imageNamed:@"giftbox-3"];
+        
+        return giftBoxImage;
+    }
+}
+
 
 #pragma mark - Action handlers
 
@@ -335,10 +357,17 @@
         } else {
             picture = nil;
         }
-        long x = self.listSelected.items.count;
-        NSNumber *position = [NSNumber numberWithLong:x];
         
-        [self.dataStore addGiftItemWithName:self.itemNameTextField.text andUrl:self.urlTextField.text andPicture:picture andDetails:self.itemDetailsTextView.text andPosition:position andList:self.listSelected];
+        if (self.itemSelected) {
+            
+            [self.dataStore editItemWithItem:self.itemSelected name:self.itemNameTextField.text url:self.urlTextField.text picture:picture details:self.itemDetailsTextView.text];
+        } else {
+            
+            long x = self.listSelected.items.count;
+            NSNumber *position = [NSNumber numberWithLong:x];
+            
+            [self.dataStore addGiftItemWithName:self.itemNameTextField.text andUrl:self.urlTextField.text andPicture:picture andDetails:self.itemDetailsTextView.text andPosition:position andList:self.listSelected];
+        }
 
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {

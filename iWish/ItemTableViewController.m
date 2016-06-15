@@ -161,8 +161,6 @@
         
     if (imageWithData) {
         UIImage *imageToDisplay =[UIImage imageWithCGImage:[imageWithData CGImage]];
-//                                                     scale:[imageWithData scale]
-//                                               orientation: UIImageOrientationRight];
         
         return imageToDisplay;
     } else {

@@ -9,6 +9,7 @@
 #import "ItemTableViewController.h"
 #import "AddItemViewController.h"
 #import "ItemCell.h"
+#import "ItemDetailViewController.h"
 
 #import <CoreData/CoreData.h>
 #import "AppDelegate.h"
@@ -103,6 +104,23 @@
     
         addItemVC.listSelected = self.selectedList;
         addItemVC.dataStore = self.dataStore;
+    }
+    
+    if ([segue.identifier isEqualToString:@"ShowItemDetailsSegue"]) {
+        
+        ItemDetailViewController *itemDetailVC = (ItemDetailViewController *)[segue destinationViewController];
+        
+        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:sender];
+        
+        NSArray *sortedItems = [self sortItemsArray];
+        
+        Item *selectedItem = sortedItems[cellIndexPath.row];
+        
+        itemDetailVC.selectedItem = selectedItem;
+        itemDetailVC.dataStore = self.dataStore;
+        
+
+        
     }
 }
 

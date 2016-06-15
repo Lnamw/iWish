@@ -19,6 +19,7 @@
 		AA814ADD1D0ACAE800D9858B /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA814ADC1D0ACAE800D9858B /* ShareViewController.m */; };
 		AA814AE01D0ACAE800D9858B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA814ADE1D0ACAE800D9858B /* MainInterface.storyboard */; };
 		AA814AE41D0ACAE800D9858B /* iWishShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AA814AD91D0ACAE700D9858B /* iWishShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AAB076E61D1148770062C40C /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB076E51D1148770062C40C /* ItemDetailViewController.m */; };
 		AABDF2B31D06E2C3002FE238 /* iWishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABDF2B21D06E2C3002FE238 /* iWishTests.m */; };
 		AABDF2BB1D06E2FD002FE238 /* ItemTableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AABDF2BA1D06E2FD002FE238 /* ItemTableViewControllerTests.m */; };
 		AACDCCB31CFDFBBE001CB851 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AACDCCB21CFDFBBE001CB851 /* main.m */; };
@@ -82,6 +83,8 @@
 		AA814ADC1D0ACAE800D9858B /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		AA814ADF1D0ACAE800D9858B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		AA814AE11D0ACAE800D9858B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAB076E41D1148770062C40C /* ItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDetailViewController.h; sourceTree = "<group>"; };
+		AAB076E51D1148770062C40C /* ItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDetailViewController.m; sourceTree = "<group>"; };
 		AABDF2B01D06E2C3002FE238 /* iWishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iWishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABDF2B21D06E2C3002FE238 /* iWishTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iWishTests.m; sourceTree = "<group>"; };
 		AABDF2B41D06E2C3002FE238 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				AABDF2BA1D06E2FD002FE238 /* ItemTableViewControllerTests.m */,
 				AAE763CA1CFF498A00051FC2 /* AddItemViewController.h */,
 				AAE763CB1CFF498A00051FC2 /* AddItemViewController.m */,
+				AAB076E41D1148770062C40C /* ItemDetailViewController.h */,
+				AAB076E51D1148770062C40C /* ItemDetailViewController.m */,
 			);
 			name = Item;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 				AAE763CC1CFF498A00051FC2 /* AddItemViewController.m in Sources */,
 				AACDCCD51CFDFE11001CB851 /* Item+CoreDataProperties.m in Sources */,
 				AAE763A41CFE282000051FC2 /* AddListViewController.m in Sources */,
+				AAB076E61D1148770062C40C /* ItemDetailViewController.m in Sources */,
 				AAE763C31CFEDB3700051FC2 /* ListCell.m in Sources */,
 				AACDCCB61CFDFBBE001CB851 /* AppDelegate.m in Sources */,
 				AAE763D51D0063A100051FC2 /* ItemCell.m in Sources */,

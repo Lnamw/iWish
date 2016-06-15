@@ -63,10 +63,12 @@
     
     [self.tableView reloadData];
     
-    [self passLastSelectedListWithIndexPath:self.cellIndexPath];
-    
-    [self.itemTVC.tableView reloadData];
-    
+    if (self.lists.count) {
+        [self passLastSelectedListWithIndexPath:self.cellIndexPath];
+        
+        [self.itemTVC.tableView reloadData];
+    }
+
 }
 
 #pragma mark - Table view data source

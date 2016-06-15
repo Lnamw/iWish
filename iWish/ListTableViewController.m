@@ -15,7 +15,7 @@
 
 @interface ListTableViewController ()
 
-@property (nonatomic, strong) ItemTableViewController *itemTVC;
+@property (nonatomic, weak) ItemTableViewController *itemTVC;
 @property (nonatomic, strong) List *lastSelectedList;
 @property (nonatomic, strong) NSIndexPath *cellIndexPath;
 

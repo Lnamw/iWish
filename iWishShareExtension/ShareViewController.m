@@ -50,21 +50,15 @@
                                   // Do what you want to do with url
                                   
                                   NSLog(@"Title is %@", self.contentText);
-                                  [itemProvider loadPreviewImageWithOptions:nil completionHandler:^(UIImage *image, NSError *error){
-                                      
-                                      if(image){
-                                          
-                                          NSString *picture = [self.dataStore savePictureToDiskWithImage:image];
+                                  
                                           long x = self.selectedList.items.count;
                                           NSNumber *position = [NSNumber numberWithLong:x];
                                           NSString *stringUrl = [url absoluteString];
                                           
-                                          [self.dataStore addGiftItemWithName:self.contentText andUrl:stringUrl andPicture:picture andDetails:@"" andPosition:position andList:self.selectedList];
+                                          [self.dataStore addGiftItemWithName:self.contentText andUrl:stringUrl andPicture:nil andDetails:@"" andPosition:position andList:self.selectedList];
 
-                                          
-                                      }
                                       [super didSelectPost];
-                                  }];
+                                  
                               }];
     }
 

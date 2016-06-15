@@ -61,12 +61,13 @@
 - (NSString *)savePictureToDiskWithImage:(UIImage *)image {
     
     if (image) {
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSUUID *uuid = [NSUUID UUID];
         NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", [uuid UUIDString]]];
         
         [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
-        
+                
         return filePath;
     }
     return nil;

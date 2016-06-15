@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class List;
+@class Item;
 @class WishDataStore;
 
 @interface ItemTableViewController : UITableViewController

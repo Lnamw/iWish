@@ -21,7 +21,7 @@
 
 - (void)deleteList:(List*)list;
 
-- (void)addGiftItemWithName:(NSString *)name andUrl:(NSString *)url andPicture:(NSString *)picture andDetails:(NSString *)details andPosition:(NSNumber *)position andList:(List *)list;
+- (void)addGiftItemWithName:(NSString *)name url:(NSString *)url picture:(NSString *)picture details:(NSString *)details position:(NSNumber *)position list:(List *)list;
 
 - (void)editItemWithItem:(Item *)item name:(NSString *)name url:(NSString *)url picture:(NSString *)picture details:(NSString *)details;
 

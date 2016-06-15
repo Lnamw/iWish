@@ -9,8 +9,11 @@
 #import "ListTableViewController.h"
 #import "ListCell.h"
 #import "ItemTableViewController.h"
+#import "ItemDetailViewController.h"
 #import "List.h"
 #import "WishDataStore.h"
+
+#import "Item.h"
 
 
 @interface ListTableViewController ()
@@ -68,7 +71,6 @@
         
         [self.itemTVC.tableView reloadData];
     }
-
 }
 
 #pragma mark - Table view data source
@@ -126,6 +128,7 @@
         [self passLastSelectedListWithIndexPath:self.cellIndexPath];
 
         self.itemTVC.dataStore = self.dataStore;
+        
     }
 }
 

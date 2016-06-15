@@ -386,7 +386,7 @@
         <!--Item Detail View Controller-->
         <scene sceneID="vD2-3y-s4v">
             <objects>
-                <viewController id="f2n-DU-JF6" customClass="ItemDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemDetailViewController" id="f2n-DU-JF6" customClass="ItemDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ugC-DB-6L2"/>
                         <viewControllerLayoutGuide type="bottom" id="tIN-9I-UFt"/>

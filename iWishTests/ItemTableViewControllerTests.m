@@ -42,8 +42,8 @@
     
     [self deletedItemAtRow:1];
     
-    XCTAssertEqual([self itemPositionAtRow:0].integerValue, 1);
-    XCTAssertEqual([self itemPositionAtRow:1].integerValue, 2);
+    XCTAssertEqual([self itemPositionAtRow:0].integerValue, 0);
+    XCTAssertEqual([self itemPositionAtRow:1].integerValue, 1);
 
 }
 
@@ -51,16 +51,16 @@
     
     [self insertNumberOfItems:3];
     
-    XCTAssertEqual([self itemPositionAtRow:0].integerValue, 1);
-    XCTAssertEqual([self itemPositionAtRow:1].integerValue, 2);
-    XCTAssertEqual([self itemPositionAtRow:2].integerValue, 3);
+    XCTAssertEqual([self itemPositionAtRow:0].integerValue, 0);
+    XCTAssertEqual([self itemPositionAtRow:1].integerValue, 1);
+    XCTAssertEqual([self itemPositionAtRow:2].integerValue, 2);
     
 }
 
 - (void)testDeletingItemsNumberOfItems {
     [self insertNumberOfItems:3];
     [self deletedItemAtRow:0];
-    XCTAssertEqual(self.controller.selectedList.items.count, 2);
+    XCTAssertEqual(self.controller.selectedList.items.count, 3);
 }
 
 #pragma mark - Helpers
@@ -79,7 +79,7 @@
 }
 
 - (void)insertNumberOfItems:(NSUInteger)itemCount {
-    for (int i = 1; i <= itemCount; i++) {
+    for (int i = 0; i <= itemCount; i++) {
         Item *item = (Item*)[NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:self.moc];
         item.name = [NSString stringWithFormat:@"%d", i];
         item.position = @(i);

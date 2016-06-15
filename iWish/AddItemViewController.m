@@ -22,6 +22,8 @@
 @property (nonatomic) UIEdgeInsets originalContentInsets;
 @property (nonatomic) BOOL pictureTaken;
 
+@property (nonatomic, copy) NSString *picture;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *itemNameTextField;
@@ -42,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.pictureTaken = NO;
+//    self.pictureTaken = NO;
 
     [self.doneButton setEnabled:NO];
     
@@ -54,24 +56,25 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-    if (self.itemSelected) {
+    if (self.itemSelected && !self.pictureTaken) {
         
         self.title = @"Edit Item";
 
         self.itemNameTextField.text = self.itemSelected.name;
         self.itemDetailsTextView.text = self.itemSelected.details;
         self.urlTextField.text = self.itemSelected.url;
-        
-        if (!self.pictureTaken) {
-            self.itemImageView.image = [self displayImage:self.itemSelected];
-        }
+        self.picture = self.itemSelected.picture;
+        self.itemImageView.image = [self displayImage:self.itemSelected];
         
         [self.doneButton setEnabled:YES];
     } else {
         self.title = @"Add Item";
     }
     
+    self.pictureTaken = NO;
+    
 }
+
 
 - (void) viewDidAppear:(BOOL)animated  {
     
@@ -146,11 +149,23 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
-    self.pictureTaken = YES;
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    
+//    self.pictureTaken = YES;
+    
+//    NSString *picture;
+//    if (self.pictureTaken) {
+        self.picture = [self.dataStore savePictureToDiskWithImage:image];
+//    } else {
+//        picture = nil;
+//    }
+
+    
+    self.itemImageView.image = image;
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-    self.itemImageView.image = image;
+
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -299,7 +314,7 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = sourceType;
-    
+    self.pictureTaken = YES;
     [self presentViewController:picker animated:YES completion:nil];
 }
 
@@ -351,22 +366,16 @@
     }
     if (self.isValidUrl || self.urlTextField.text.length == 0) {
         
-        NSString *picture;
-        if (self.pictureTaken) {
-            picture = [self.dataStore savePictureToDiskWithImage:self.itemImageView.image];
-        } else {
-            picture = nil;
-        }
-        
+
         if (self.itemSelected) {
             
-            [self.dataStore editItemWithItem:self.itemSelected name:self.itemNameTextField.text url:self.urlTextField.text picture:picture details:self.itemDetailsTextView.text];
+            [self.dataStore editItemWithItem:self.itemSelected name:self.itemNameTextField.text url:self.urlTextField.text picture:self.picture details:self.itemDetailsTextView.text];
         } else {
             
             long x = self.listSelected.items.count;
             NSNumber *position = [NSNumber numberWithLong:x];
             
-            [self.dataStore addGiftItemWithName:self.itemNameTextField.text andUrl:self.urlTextField.text andPicture:picture andDetails:self.itemDetailsTextView.text andPosition:position andList:self.listSelected];
+            [self.dataStore addGiftItemWithName:self.itemNameTextField.text url:self.urlTextField.text picture:self.picture details:self.itemDetailsTextView.text position:position list:self.listSelected];
         }
 
         [self dismissViewControllerAnimated:YES completion:nil];

@@ -84,7 +84,7 @@
         
         NSArray *sortedItems = [self sortItemsArray];
         
-        int i = 1;
+        int i = 0;
         for (Item *anItem in sortedItems) {
             anItem.position = @(i);
             i++;
@@ -118,9 +118,6 @@
         
         itemDetailVC.selectedItem = selectedItem;
         itemDetailVC.dataStore = self.dataStore;
-        
-
-        
     }
 }
 

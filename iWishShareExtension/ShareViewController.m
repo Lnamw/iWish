@@ -55,7 +55,7 @@
                                           NSNumber *position = [NSNumber numberWithLong:x];
                                           NSString *stringUrl = [url absoluteString];
                                           
-                                          [self.dataStore addGiftItemWithName:self.contentText andUrl:stringUrl andPicture:nil andDetails:@"" andPosition:position andList:self.selectedList];
+                                          [self.dataStore addGiftItemWithName:self.contentText url:stringUrl picture:nil details:@"" position:position list:self.selectedList];
 
                                       [super didSelectPost];
                                   

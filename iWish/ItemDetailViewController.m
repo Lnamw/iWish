@@ -36,11 +36,16 @@
     self.detailLabel.text = self.selectedItem.details;
     self.detailImageView.image = [self displayImage:self.selectedItem];
     
+    NSString *domain = [[NSURL URLWithString:self.selectedItem.url] host];
+    [self.urlButton setTitle:[NSString stringWithFormat:@"link: %@", domain] forState:UIControlStateNormal];
+    
     if ([self.selectedItem.url isEqualToString:@""]) {
         [self.urlButton setHidden:YES];
     } else {
         [self.urlButton setHidden:NO];
     }
+    
+
 }
 
 #pragma mark - Navigation

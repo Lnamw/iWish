@@ -131,10 +131,13 @@
 -(void)updateDetailViewControllerSelectedItem {
     NSArray *sortedItems = [self sortItemsArray];
 
-    Item *selectedItem = sortedItems[self.tableView.indexPathForSelectedRow.row];
+    if (sortedItems.count) {
+        Item *selectedItem = sortedItems[self.tableView.indexPathForSelectedRow.row];
+        
+        self.itemDetailVC.selectedItem = selectedItem;
+        self.itemDetailVC.dataStore = self.dataStore;
+    }
 
-    self.itemDetailVC.selectedItem = selectedItem;
-    self.itemDetailVC.dataStore = self.dataStore;
     
 }
 

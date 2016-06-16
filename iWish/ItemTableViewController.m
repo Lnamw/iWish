@@ -23,6 +23,7 @@
 @interface ItemTableViewController () <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *lists;
+@property (nonatomic, weak) ItemDetailViewController *itemDetailVC;
 
 - (IBAction)shareList:(id)sender;
 
@@ -93,6 +94,12 @@
     }
 }
 
+- (void)setSelectedList:(List *)selectedList {
+    _selectedList = selectedList;
+    
+    [self updateDetailViewControllerSelectedItem];
+
+}
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -108,17 +115,27 @@
     
     if ([segue.identifier isEqualToString:@"ShowItemDetailsSegue"]) {
         
-        ItemDetailViewController *itemDetailVC = (ItemDetailViewController *)[segue destinationViewController];
+        self.itemDetailVC = (ItemDetailViewController *)[segue destinationViewController];
         
-        NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:sender];
+        [self updateDetailViewControllerSelectedItem];
         
-        NSArray *sortedItems = [self sortItemsArray];
-        
-        Item *selectedItem = sortedItems[cellIndexPath.row];
-        
-        itemDetailVC.selectedItem = selectedItem;
-        itemDetailVC.dataStore = self.dataStore;
+//        NSArray *sortedItems = [self sortItemsArray];
+//        
+//        Item *selectedItem = sortedItems[cellIndexPath.row];
+//        
+//        itemDetailVC.selectedItem = selectedItem;
+//        itemDetailVC.dataStore = self.dataStore;
     }
+}
+
+-(void)updateDetailViewControllerSelectedItem {
+    NSArray *sortedItems = [self sortItemsArray];
+
+    Item *selectedItem = sortedItems[self.tableView.indexPathForSelectedRow.row];
+
+    self.itemDetailVC.selectedItem = selectedItem;
+    self.itemDetailVC.dataStore = self.dataStore;
+    
 }
 
 #pragma mark - Mail compose controller delegate

@@ -8,7 +8,7 @@
 
 #import "ItemDetailViewController.h"
 #import "AddItemViewController.h"
-
+#import "WishDataStore.h"
 #import "Item.h"
 
 @interface ItemDetailViewController ()
@@ -17,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIButton *urlButton;
+
+@property (weak, nonatomic) AddItemViewController *addItemVC;
 
 - (IBAction)buyButtonPressed:(id)sender;
 
@@ -48,6 +50,13 @@
 
 }
 
+-(void)setSelectedItem:(Item *)selectedItem {
+    _selectedItem = selectedItem;
+    
+    [self updateChildViewControllerItem];
+    
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -55,16 +64,23 @@
     if ([segue.identifier isEqualToString:@"EditItemSegue"]) {
         
         UINavigationController *navController = [segue destinationViewController];
-        AddItemViewController *addItemVC = (AddItemViewController *)([navController viewControllers][0]);
+        self.addItemVC = (AddItemViewController *)([navController viewControllers][0]);
         
-        addItemVC.itemSelected = self.selectedItem;
-        addItemVC.dataStore = self.dataStore;
+        [self updateChildViewControllerItem];
+        
+//        addItemVC.itemSelected = self.selectedItem;
+//        addItemVC.dataStore = self.dataStore;
     }
     
 }
 
+-(void)updateChildViewControllerItem {
+    
+    self.addItemVC.itemSelected = self.selectedItem;
+    self.addItemVC.dataStore = self.dataStore;
+}
 
-#pragma mark - Private 
+#pragma mark - Private
 
 - (UIImage *)displayImage:(Item *)anItem {
     
